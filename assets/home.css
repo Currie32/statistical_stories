@@ -1,0 +1,9 @@
+.page-home {
+    min-width: 100px;
+}
+
+.home-title {
+    text-align: center;
+    font-size: 28px;
+    margin: 50px auto 30px;
+}

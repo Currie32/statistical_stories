@@ -1,0 +1,52 @@
+.plot-parameters {
+    margin: 40px auto 0px;
+    justify-content: center;
+    display: flex;
+}
+
+.parameter {
+    margin: 0px 15px;
+}
+
+.parameter-label {
+    margin-right: 10px;
+}
+
+.plots-distribution {
+    display: flex;
+    margin: 0px auto -40px;
+}
+
+.plot {
+    display: inline-block;
+    max-width: 50%;
+}
+@media (max-width: 1000px) {
+    .plots-distribution {
+        display: block;
+    }
+    .plot {
+        display: block;
+        max-width: 100%;
+        margin: 0px auto -40px;
+    }
+}
+
+@media (max-width: 500px) {
+    #normal-plot {height: 350px;}
+    #normal-cdf-plot {height: 350px;}
+    #histogram-plot {height: 350px;}
+}
+
+#button-new-data {
+    background-color: #05445E;
+    color: white;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#text-test-result {
+    margin: -3px 0px 25px;
+}
