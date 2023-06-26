@@ -34,7 +34,7 @@ pre {
 }
 
 /* content */
-#content-body {
+#content-body-wrapper {
     margin-left: 350px;
     display: flex;
     justify-content: center;
@@ -58,10 +58,10 @@ pre {
     }
 }
 @media (max-width: 800px) {
-    #content-body {
+    #content-body-wrapper {
         margin-left: 0px
     }
-    #page-content {
+    #content-body {
         max-width: 100%;
         min-width: 0px;
         padding: 0px 10px;

@@ -27,7 +27,7 @@
     #button-menu {
         display: block;
     }
-    .button-and-title {
+    .button-menu-and-title {
         display: flex;
         padding-top: 20px;
     }
@@ -52,7 +52,7 @@
     display: block;
 }
 
-.navbar-menu-item {
+.navbar-menu {
     margin-bottom: 5px;
 }
 
