@@ -7,7 +7,7 @@ from plotly.graph_objs._figure import Figure as plotly_figure
 from scipy.stats import norm, shapiro, gaussian_kde
 
 
-normal_layout = html.Div(className='content', children=[
+layout_normal = html.Div(className='content', children=[
     html.H1(className='content-title', children='Normal Distribution'),
     html.H2(className='section-title', children='Overview'),
     html.Div(className='paragraph', children=[
@@ -24,11 +24,11 @@ normal_layout = html.Div(className='content', children=[
     html.Div(className='plot-parameters', children=[
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Mean'),
-            dcc.Input(id='normal-mean-input', value=0, min=-1000, max=1000, step=0.1, type='number'),
+            dcc.Input(className='parameter-value', id='normal-mean-input', value=0, min=-1000, max=1000, step=0.1, type='number'),
         ]),
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Standard Deviation'),
-            dcc.Input(id='normal-std-input', value=1, min=-1000, max=1000, step=0.1, type='number'),
+            dcc.Input(className='parameter-value', id='normal-std-input', value=1, min=-1000, max=1000, step=0.1, type='number'),
         ])
     ]),
     html.Div(className='plots-distribution', children=[
@@ -113,7 +113,7 @@ go.Figure(data=[histogram], layout=layout)
 ])
 
 
-def normal_distribution_plots(
+def distribution_plots_normal(
     mean: float,
     std: float,
 ) -> Tuple[plotly_figure, plotly_figure]:

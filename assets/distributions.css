@@ -1,20 +1,37 @@
 .plot-parameters {
-    margin: 40px auto 0px;
+    margin: 25px auto 0px;
     justify-content: center;
     display: flex;
 }
 
 .parameter {
     margin: 0px 15px;
+    display: flex;
+    flex-direction: column;
+    max-width: 150px;
 }
 
 .parameter-label {
-    margin-right: 10px;
+    margin-bottom: 5px;
+    min-width: 200px;
+    padding-left: 2px;
+}
+
+.parameter-value {
+    height: 36px;
+    line-height: 34px;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0px 10px;
 }
 
 .plots-distribution {
     display: flex;
     margin: 0px auto -40px;
+}
+.plot-full-width {
+    width: 100%;
 }
 
 .plot {
@@ -44,5 +61,5 @@
     font-size: 16px;
     padding: 6px 10px;
     border-radius: 5px;
-    margin-top: 10px;
+    margin-top: 5px;
 }

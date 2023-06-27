@@ -5,9 +5,10 @@ from dash import Dash, dcc, html
 from dash.dependencies import Input, Output, State
 from plotly.graph_objs._figure import Figure as plotly_figure
 
-from pages.distributions.normal import normal_layout, normal_distribution_plots, histogram_normal_plot
-from pages.distributions.poisson import poisson_layout, poisson_distribution_plots, histogram_poisson_plot
-from pages.home import home_layout
+from pages.distributions.normal import layout_normal, distribution_plots_normal, histogram_normal_plot
+from pages.distributions.poisson import layout_poisson, distribution_plots_poisson, histogram_poisson_plot
+from pages.statistical_models.k_nearest_neighbors import layout_k_nearest_neighbors, k_nearest_neighbors
+from pages.home import layout_home
 
 
 app = Dash(
@@ -32,6 +33,10 @@ app.layout = html.Div([
             ]),
             # "display: none" is also replaced depending on screen size and interactions
             html.Div(id='navbar-menus', className='menu-hidden', style={'display': 'none'}, children=[
+                html.Div([
+                    dcc.Input(id='search-bar', type='text', placeholder='Search...'),
+                    html.Div(id='search-results')
+                ]),
                 dcc.Dropdown(
                     className='navbar-menu',
                     id='menu-distributions',
@@ -48,7 +53,7 @@ app.layout = html.Div([
                     className='navbar-menu',
                     id='menu-statistical-models',
                     options=[
-                        {'label': 'K-Nearest Neighbours', 'value': '/k-nearest-neighbours'},
+                        {'label': 'K-Nearest Neighbors', 'value': '/k-nearest-neighbors'},
                         {'label': 'Linear Regression', 'value': '/linear-regression'},
                         {'label': 'Support Vector Machine', 'value': '/support-vector-machine'},
                     ],
@@ -79,7 +84,7 @@ app.layout = html.Div([
 
 
 @app.callback(
-    Output('url', 'pathname'),
+    Output('url', 'pathname', allow_duplicate=True),
     Output('menu-distributions', 'value', allow_duplicate=True),
     Output('menu-statistical-tests', 'value', allow_duplicate=True),
     Output('menu-statistical-models', 'value', allow_duplicate=True),
@@ -115,11 +120,13 @@ def update_content(pathname: str) -> str:
     Update the content of the website to reflect the new url.
     """
     if pathname == "/":
-        return home_layout
+        return layout_home
     elif pathname == '/normal':
-        return normal_layout
+        return layout_normal
     elif pathname == '/poisson':
-        return poisson_layout
+        return layout_poisson
+    elif pathname == '/k-nearest-neighbors':
+        return layout_k_nearest_neighbors
     else:
         return html.Div([
             html.H1('404: Not found'),
@@ -183,7 +190,7 @@ def display_navbar_menu_toggle(
     Input('normal-mean-input', 'value'),
     Input('normal-std-input', 'value'),
 )
-def update_normal_distribution_plots(
+def update_distribution_plots_normal(
     mean: float,
     std: float,
 ) -> Tuple[plotly_figure, plotly_figure]:
@@ -191,19 +198,20 @@ def update_normal_distribution_plots(
     Update the normal distributions plots using the
     new mean and standard deviation.
     """
-    plot_pdf, plot_cdf = normal_distribution_plots(mean, std)
+    plot_pdf, plot_cdf = distribution_plots_normal(mean, std)
     return plot_pdf, plot_cdf
 
 
 @app.callback(Output('poisson-plot', 'figure'),
               Output('poisson-cdf-plot', 'figure'),
               Input('poisson-lambda-input', 'value'))
-def update_poisson_distribution_plots(lam: float) -> plotly_figure:
+def update_distribution_plots_poisson(lam: float) -> plotly_figure:
     """
     Update the poisson distribution plots using the new lambda value.
     """
-    plot_pmf, plot_cmf = poisson_distribution_plots(lam)
+    plot_pmf, plot_cmf = distribution_plots_poisson(lam)
     return plot_pmf, plot_cmf
+
 
 @app.callback(
     Output('histogram-plot', 'figure'),
@@ -219,6 +227,71 @@ def generate_histogram_plot(n_clicks: int, pathname: str) -> Tuple[plotly_figure
 
     elif pathname == "/poisson":
         return histogram_poisson_plot()
+
+
+@app.callback(
+    Output('knn-plot', 'figure'),
+    Input('knn-n-neighbors-input', 'value'),
+    Input('knn-weights-input', 'value'),
+    Input('knn-algorithm-input', 'value'),
+    Input('button-new-data', 'n_clicks'),
+)
+def update_k_nearest_neighbors_plot(
+    n_neighbors: int,
+    weights: str,
+    algorithm: str,
+    random_state: int,
+) -> plotly_figure:
+    """
+    Update the poisson distribution plots using the new lambda value.
+    """
+    plot = k_nearest_neighbors(n_neighbors, weights, algorithm, random_state)
+    return plot
+
+
+# Function to read the content of a page from a file
+def read_page_content(page_file):
+    with open(page_file, 'r') as f:
+        content = f.read()
+    return content
+
+@app.callback(
+    Output('search-results', 'children'),
+    Output('url', 'pathname'),
+    [Input('search-bar', 'value')],
+    [State('url', 'pathname')],
+)
+def search_pages(search_term, current_page):
+    # Perform the search logic here based on the search term
+    # You can search through your pages or content data structure to find relevant pages
+    # For demonstration purposes, let's assume you have a list of page files
+
+    if not search_term:
+        return None, current_page
+
+    pages = [
+        {'title': 'Normal distribution', 'path': 'pages/distributions/normal.py', 'url': '/normal'},
+        {'title': 'Poisson distribution', 'path': 'pages/distributions/poisson.py', 'url': '/poisson'},
+    ]
+    matching_pages = []
+
+    for page in pages:
+        content = read_page_content(page['path'])
+        if search_term.lower() in content.lower():
+            matching_pages.append(page)
+
+    if matching_pages:
+        # If there are matching pages, display them
+        result_list = []
+        for page in matching_pages:
+            result_list.append(html.Div([
+                html.A(page['title'], href=page['url'])
+            ]))
+        return result_list, current_page
+    else:
+        # If no matching pages are found, display a message
+        return html.P('No matching pages found.'), current_page
+
 
 
 if __name__ == '__main__':

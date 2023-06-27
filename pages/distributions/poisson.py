@@ -8,7 +8,7 @@ from plotly.graph_objs._figure import Figure as plotly_figure
 from scipy.stats import norm, poisson, shapiro
 
 
-poisson_layout = html.Div(className='content', children=[
+layout_poisson = html.Div(className='content', children=[
     html.H1(className='content-title', children='Poisson Distribution'),
     html.H2(className='section-title', children='Overview'),
     html.Div(className='paragraph', children=[
@@ -28,7 +28,7 @@ poisson_layout = html.Div(className='content', children=[
     html.Div(className='plot-parameters', children=[
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Lambda'),
-            dcc.Input(id='poisson-lambda-input', value=1, min=0, max=1000, step=0.1, type='number'),
+            dcc.Input(className='parameter-value', id='poisson-lambda-input', value=1, min=0, max=1000, step=0.1, type='number'),
         ]),
     ]),
     html.Div(className='plots-distribution', children=[
@@ -109,7 +109,7 @@ go.Figure(data=[histogram], layout=layout)
 ])
 
 
-def poisson_distribution_plots(
+def distribution_plots_poisson(
     lam: float,
 ) -> Tuple[plotly_figure, plotly_figure]:
     """
