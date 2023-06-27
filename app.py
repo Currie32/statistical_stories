@@ -2,7 +2,7 @@ from typing import Dict, Tuple
 
 import dash_bootstrap_components as dbc
 from dash import Dash, dcc, html
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output, State, ALL
 from plotly.graph_objs._figure import Figure as plotly_figure
 
 from pages.distributions.normal import layout_normal, distribution_plots_normal, histogram_normal_plot
@@ -112,6 +112,23 @@ def update_url(
 
 
 @app.callback(
+    Output('content-body', 'children', allow_duplicate=True),
+    [Input('url', 'pathname')],
+    prevent_initial_call=True,
+)
+def scroll_to_top(pathname):
+    """
+    Scroll to the top of the page when a new URL is used.
+    """
+    scroll_script = '''
+        <script>
+            window.scrollTo(0, 0);
+        </script>
+    '''
+    return scroll_script
+
+
+@app.callback(
     Output('content-body', 'children'),
     Input('url', 'pathname'),
 )
@@ -119,6 +136,7 @@ def update_content(pathname: str) -> str:
     """
     Update the content of the website to reflect the new url.
     """
+
     if pathname == "/":
         return layout_home
     elif pathname == '/normal':
@@ -284,9 +302,7 @@ def search_pages(search_term, current_page):
         # If there are matching pages, display them
         result_list = []
         for page in matching_pages:
-            result_list.append(html.Div([
-                html.A(page['title'], href=page['url'])
-            ]))
+            result_list.append(html.A(page['title'], href=page['url']))
         return result_list, current_page
     else:
         # If no matching pages are found, display a message

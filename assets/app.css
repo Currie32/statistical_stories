@@ -74,6 +74,8 @@ pre {
 .content-title {
     margin-top: 60px;
     text-align: center;
+    font-weight: 200;
+    font-size: 40px;
 }
 
 .section-title {
