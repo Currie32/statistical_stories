@@ -5,6 +5,11 @@ html {
 
 body {
     margin: 0px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+p {
+    line-height: 22px;
 }
 
 li {
@@ -47,6 +52,47 @@ pre {
     margin: 0 auto 60px;
     max-width: 800px;
 }
+
+.content-title {
+    margin-top: 60px;
+    text-align: center;
+    font-weight: 200;
+    font-size: 40px;
+}
+.content-subtitle {
+    text-align: center;
+    margin: -10px auto 40px;
+    font-style: italic;
+    color: #05445E;
+    font-weight: 200;
+    font-size: 28px;
+}
+
+.section-title {
+    margin: 40px auto 20px;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.paragraph {
+    margin: auto;
+    font-size: 18px;
+}
+.paragraph-italic {
+    margin: auto;
+    font-size: 16px;
+    font-style: italic;
+    color: #555;
+}
+.paragraph-italic a {
+    color: #555;
+}
+.paragraph-home {
+    margin: auto;
+    font-size: 18px;
+    max-width: 600px;
+}
+
 @media (max-width: 1200px) {
     .content {
         max-width: 600px;
@@ -69,29 +115,7 @@ pre {
     .content {
         max-width: 100%;
     }
-}
-
-.content-title {
-    margin-top: 60px;
-    text-align: center;
-    font-weight: 200;
-    font-size: 40px;
-}
-
-.section-title {
-    margin: 40px auto 20px;
-}
-
-.paragraph {
-    margin: auto;
-    font-size: 18px;
-}
-.paragraph-italic {
-    margin: auto;
-    font-size: 16px;
-    font-style: italic;
-    color: #555;
-}
-.paragraph-italic a {
-    color: #555;
+    .content-title {
+        margin-top: 120px;
+    }
 }

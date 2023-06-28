@@ -143,7 +143,7 @@ def k_nearest_neighbors(
         x=x_test[:, 0],
         y=x_test[:, 1],
         mode='markers',
-        marker=dict(color=preds, colorscale='jet', size=10, symbol='cross'),
+        marker=dict(color=y_test, colorscale='jet', size=10, symbol='cross'),
         name='Testing Data',
         showlegend=True,
     )
@@ -154,14 +154,14 @@ def k_nearest_neighbors(
         y=[None],
         mode='markers',
         marker=dict(color='rgb(142, 146, 203)', size=12, symbol='square'),
-        name='Blue predictions'
+        name='Blue prediction boundary'
     )
     legend_red = go.Scatter(
         x=[None],
         y=[None],
         mode='markers',
         marker=dict(color='rgb(188, 152, 159)', size=12, symbol='square'),
-        name='Red predictions'
+        name='Red prediction boundary'
     )
 
     # Create a contour plot of the decision boundary
