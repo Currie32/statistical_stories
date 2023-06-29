@@ -1,4 +1,4 @@
-from dash import dcc, html
+from dash import html
 
 
 layout_home = html.Div(className='content', children=[
@@ -13,7 +13,7 @@ layout_home = html.Div(className='content', children=[
     html.Div(className='paragraph-home', children=[
         html.P(
             "Statistics, data science, and machine learning are useful tools to know, but can be difficult to learn. "
-            "That's why I created Statistical Stories!"
+            "That's why I created Statistical Stories."
         ),
         html.P(
             "Here you'll find easy to understand stories that explain the technical concepts in simple terms. "
@@ -23,8 +23,8 @@ layout_home = html.Div(className='content', children=[
             "and much more change as you alter their parameters."
         ),
         html.P(
-            "I hope that you'll find this website to be a useful guide and if you see anything missing/wrong, "
-            "send me an email at david.currie32@gmail.com"
+            "I hope that you'll find this website to be a useful resources, but it's still under active development, "
+            "so if you see anything wrong or want me to add something soon, send me an email at david.currie32@gmail.com."
         )
     ]),
 ])

@@ -1,13 +1,14 @@
 from typing import Dict, Tuple
 
 import dash_bootstrap_components as dbc
-from dash import Dash, dcc, html
-from dash.dependencies import Input, Output, State, ALL
+from dash import Dash, dcc, html, no_update
+from dash.dependencies import Input, Output, State
 from plotly.graph_objs._figure import Figure as plotly_figure
 
 from pages.distributions.normal import layout_normal, distribution_plots_normal, histogram_normal_plot
 from pages.distributions.poisson import layout_poisson, distribution_plots_poisson, histogram_poisson_plot
 from pages.statistical_models.k_nearest_neighbors import layout_k_nearest_neighbors, k_nearest_neighbors
+from pages.statistical_tests.anova import layout_anova, anova
 from pages.home import layout_home
 
 
@@ -104,11 +105,11 @@ def update_url(
     if menu_value_distributions != "Distributions":
         return menu_value_distributions, 'Distributions', "Statistical Tests", "Statistical Models"
 
-    elif menu_value_statistical_models:
+    elif menu_value_statistical_models != "Statistical Models":
         return menu_value_statistical_models, 'Distributions', "Statistical Tests", "Statistical Models"
 
     else:
-        menu_value_statistical_tests, 'Distributions', "Statistical Tests", "Statistical Models"
+        return menu_value_statistical_tests, 'Distributions', "Statistical Tests", "Statistical Models"
 
 
 @app.callback(
@@ -136,15 +137,23 @@ def update_content(pathname: str) -> str:
     """
     Update the content of the website to reflect the new url.
     """
-
     if pathname == "/":
         return layout_home
+    # Distributions
     elif pathname == '/normal':
         return layout_normal
     elif pathname == '/poisson':
         return layout_poisson
+
+    # Statistical Models
     elif pathname == '/k-nearest-neighbors':
         return layout_k_nearest_neighbors
+    
+    # Statistical Tests
+    elif pathname == '/anova':
+        return layout_anova
+
+    # Page not found
     else:
         return html.Div([
             html.H1('404: Not found'),
@@ -267,6 +276,34 @@ def update_k_nearest_neighbors_plot(
     return plot
 
 
+@app.callback(
+    Output('anova-plot', 'figure'),
+    Output('anova-table', 'children'),
+    Input('button-new-data', 'n_clicks'),
+    Input('mean-group-a', 'value'),
+    Input('std-group-a', 'value'),
+    Input('samples-group-a', 'value'),
+    Input('mean-group-b', 'value'),
+    Input('std-group-b', 'value'),
+    Input('samples-group-b', 'value'),
+    Input('mean-group-c', 'value'),
+    Input('std-group-c', 'value'),
+    Input('samples-group-c', 'value'),
+)
+def update_anova_plot(
+    n_clicks,
+    mean_a, std_dev_a, samples_a,
+    mean_b, std_dev_b, samples_b,
+    mean_c, std_dev_c, samples_c,
+):
+    """
+    qwe
+    """
+    plot, table = anova(n_clicks, mean_a, std_dev_a, samples_a, mean_b, std_dev_b, samples_b, mean_c, std_dev_c, samples_c)
+
+    return plot, table
+
+
 # Function to read the content of a page from a file
 def read_page_content(page_file):
     with open(page_file, 'r') as f:
@@ -290,6 +327,8 @@ def search_pages(search_term, current_page):
     pages = [
         {'title': 'Normal distribution', 'path': 'pages/distributions/normal.py', 'url': '/normal'},
         {'title': 'Poisson distribution', 'path': 'pages/distributions/poisson.py', 'url': '/poisson'},
+        {'title': 'k-Nearest Neighbors', 'path': 'pages/statistical_models/k_nearest_neighbors.py', 'url': '/k-nearest-neighbors'},
+        {'title': 'ANOVA', 'path': 'pages/statistical_tests/anova.py', 'url': 'anova'},
     ]
     matching_pages = []
 
@@ -303,11 +342,11 @@ def search_pages(search_term, current_page):
         result_list = []
         for page in matching_pages:
             result_list.append(html.A(page['title'], href=page['url']))
-        return result_list, current_page
+        return result_list, no_update
     else:
         # If no matching pages are found, display a message
-        return html.P('No matching pages found.'), current_page
-
+        return html.P('No matching pages found.'), no_update
+        
 
 
 if __name__ == '__main__':

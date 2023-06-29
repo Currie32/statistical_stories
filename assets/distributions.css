@@ -24,6 +24,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 0px 10px;
+    margin-bottom: 10px;
 }
 
 .plots-distribution {
@@ -33,11 +34,16 @@
 .plot-full-width {
     width: 100%;
 }
+.table-full-width {
+    width: 100%;
+    margin-top: 25px;
+}
 
 .plot {
     display: inline-block;
     max-width: 50%;
 }
+
 @media (max-width: 1000px) {
     .plots-distribution {
         display: block;
@@ -46,6 +52,16 @@
         display: block;
         max-width: 100%;
         margin: 0px auto -40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .parameter {
+        max-width: 100px;
+        margin: 0px auto;
+    }
+    table {
+        font-size: 12px;
     }
 }
 

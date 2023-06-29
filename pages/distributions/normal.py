@@ -9,6 +9,10 @@ from scipy.stats import norm, shapiro, gaussian_kde
 
 layout_normal = html.Div(className='content', children=[
     html.H1(className='content-title', children='Normal Distribution'),
+    html.Div(
+        className="resource-link",
+        children=[html.A("Link to numpy", target="_blank", href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html")]
+    ),
     html.H2(className='section-title', children='Overview'),
     html.Div(className='paragraph', children=[
         html.P("Once upon a time there was a farmer named Dave. Dave had a big field where he grew his crops, and he was always curious about how his crops grew. He wanted to understand how the height of his plants varied from one another."),
@@ -97,6 +101,7 @@ histogram = go.Histogram(
     opacity=0.7,
     marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
     showlegend=False,
+    hovertemplate='x: %{x:.1f}<br>Probability Density: %{y:.2f}<extra></extra>',
 )
 
 layout = go.Layout(
@@ -126,21 +131,25 @@ def distribution_plots_normal(
     x = np.linspace(-10, 10, 200)
 
     y_pdf = norm.pdf(x, loc=mean, scale=std)
-    fig_pdf = go.Figure(data=go.Scatter(x=x, y=y_pdf))
+    fig_pdf = go.Figure(data=go.Scatter(x=x, y=y_pdf, hovertemplate='x: %{x:.1f}<br>Probability Density: %{y:.2f}<extra></extra>',))
     fig_pdf.update_layout(
         title=dict(
             text='Probability Density Function',
             x=0.5,
-        )
+        ),
+        xaxis=dict(title='X'),
+        yaxis=dict(title='Probability Density'),
     )
 
     y_cdf = norm.cdf(x, loc=mean, scale=std)
-    fig_cdf = go.Figure(data=go.Scatter(x=x, y=y_cdf))
+    fig_cdf = go.Figure(data=go.Scatter(x=x, y=y_cdf, hovertemplate='x: %{x:.1f}<br>Probability Density: %{y:.2f}<extra></extra>',))
     fig_cdf.update_layout(
         title=dict(
             text='Cumulative Density Function',
             x=0.5,
-        )
+        ),
+        xaxis=dict(title='X'),
+        yaxis=dict(title='Probability Density'),
     )
 
     return fig_pdf, fig_cdf
@@ -165,11 +174,12 @@ def histogram_normal_plot() -> Tuple[plotly_figure, str]:
         opacity=0.7,
         marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
         showlegend=False,
+        hovertemplate='x: %{x:.1f}<br>Probability Density: %{y:.2f}<extra></extra>',
     )
 
     layout = go.Layout(
         title='Normal Distribution',
-        xaxis=dict(title='Value', range=[-4, 4]),
+        xaxis=dict(title='X', range=[-4, 4]),
         yaxis=dict(title='Probability Density'),
         showlegend=True,
     )

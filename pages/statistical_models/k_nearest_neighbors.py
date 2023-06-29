@@ -11,6 +11,10 @@ from sklearn.neighbors import KNeighborsClassifier
 
 layout_k_nearest_neighbors = html.Div(className='content', children=[
     html.H1(className='content-title', children='k-Nearest Neighbors'),
+    html.Div(
+        className="resource-link",
+        children=[html.A("Link to scikit-learn", target="_blank", href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html")]
+    ),
     html.H2(className='section-title', children='Overview'),
     html.Div(className='paragraph', children=[
         html.P("Once upon a time, there was a curious fellow named Dave who loved spending his time exploring nature. Dave had a special interest in trees and wanted to learn how to identify different types. He had heard about a powerful algorithm called k-nearest neighbors (KNN) that could predict things based on their similarity to other things. Intrigued, Dave decided to test it out."),
@@ -172,7 +176,8 @@ def k_nearest_neighbors(
         colorscale='jet',
         opacity=0.3,
         showscale=False,
-        name='Decision Boundary'
+        name='Decision Boundary',
+        hovertemplate='x: %{x:.1f}<br>y: %{y:.1f}<br>Prediction: %{z:.0f}<extra></extra>',
     )
 
     accuracy = round(np.mean(np.equal(y_test, preds)) * 100, 1)

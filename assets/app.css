@@ -12,6 +12,10 @@ p {
     line-height: 22px;
 }
 
+a {
+    color: black;
+}
+
 li {
     margin-bottom: 5px;
 }
@@ -52,7 +56,6 @@ pre {
     margin: 0 auto 60px;
     max-width: 800px;
 }
-
 .content-title {
     margin-top: 60px;
     text-align: center;
@@ -67,7 +70,18 @@ pre {
     font-weight: 200;
     font-size: 28px;
 }
-
+.resource-link {
+    margin-bottom: -40px;
+    text-align: right;
+}
+.resource-link a {
+    color: #05445E;
+    font-style: italic;
+    text-decoration: none;
+}
+.resource-link a:hover {
+    text-decoration: underline;
+}
 .section-title {
     margin: 40px auto 20px;
     font-weight: 500;
@@ -91,6 +105,21 @@ pre {
     margin: auto;
     font-size: 18px;
     max-width: 600px;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0px auto;
+}
+
+table td, table th {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+table th {
+    background-color: #05445E;
+    color: #fafafa;
 }
 
 @media (max-width: 1200px) {

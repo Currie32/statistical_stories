@@ -10,6 +10,10 @@ from scipy.stats import norm, poisson, shapiro
 
 layout_poisson = html.Div(className='content', children=[
     html.H1(className='content-title', children='Poisson Distribution'),
+    html.Div(
+        className="resource-link",
+        children=[html.A("Link to numpy", target="_blank", href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.poisson.html")]
+    ),
     html.H2(className='section-title', children='Overview'),
     html.Div(className='paragraph', children=[
         html.P("Once upon a time there was a bakery run by a friendly baker named Dave. After years of baking, Dave noticed that during the morning rush the number of croissants that he would sell could change every hour."),
@@ -93,6 +97,7 @@ histogram = go.Histogram(
     opacity=0.7,
     marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
     showlegend=False,
+    hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>',
 )
 
 layout = go.Layout(
@@ -119,21 +124,25 @@ def distribution_plots_poisson(
     x = np.arange(0, 26)
 
     y_pdf = poisson.pmf(x, lam)
-    fig_pdf = px.bar(x=x, y=y_pdf)
+    fig_pdf = go.Figure(data=go.Scatter(x=x, y=y_pdf, hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>'))
     fig_pdf.update_layout(
         title=dict(
             text='Probability Mass Function',
             x=0.5,
-        )
+        ),
+        xaxis=dict(title='X'),
+        yaxis=dict(title='Probability Density'),
     )
 
     y_cdf = poisson.cdf(x, lam)
-    fig_cdf = go.Figure(data=go.Scatter(x=x, y=y_cdf))
+    fig_cdf = go.Figure(data=go.Scatter(x=x, y=y_cdf, hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>'))
     fig_cdf.update_layout(
         title=dict(
             text='Cumulative Mass Function',
             x=0.5,
-        )
+        ),
+        xaxis=dict(title='X'),
+        yaxis=dict(title='Probability Density'),
     )
 
     return fig_pdf, fig_cdf
@@ -157,11 +166,12 @@ def histogram_poisson_plot() -> go.Figure:
         opacity=0.7,
         marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
         showlegend=False,
+        hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>',
     )
 
     layout = go.Layout(
         title='Poisson Distribution',
-        xaxis=dict(title='Value', range=[-4, 10]),
+        xaxis=dict(title='X', range=[-4, 10]),
         yaxis=dict(title='Probability Density'),
         showlegend=True,
     )
