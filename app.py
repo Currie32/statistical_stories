@@ -18,6 +18,8 @@ app = Dash(
     external_stylesheets=[dbc.icons.BOOTSTRAP]
 )
 app.config.suppress_callback_exceptions = True
+server = app.server
+
 
 app.layout = html.Div([
     html.Div(className='container', children=[
