@@ -6,7 +6,7 @@ dash-table==5.0.0
 Flask==2.2.3
 fonttools==4.40.0
 gunicorn==20.1.0
-heroku==0.1.4
+heroku
 numpy==1.24.4
 pandas==1.5.3
 plotly==5.14.1
