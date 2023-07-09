@@ -3,10 +3,7 @@ dash-bootstrap-components==1.4.1
 dash-core-components==2.0.0
 dash-html-components==2.0.0
 dash-table==5.0.0
-Flask==2.2.3
-fonttools==4.40.0
 gunicorn==20.1.0
-heroku
 numpy==1.24.4
 pandas==2.0.3
 plotly==5.14.1

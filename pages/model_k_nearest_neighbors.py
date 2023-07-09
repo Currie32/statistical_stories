@@ -2,14 +2,16 @@ from typing import Tuple
 
 import numpy as np
 import plotly.graph_objects as go
-from dash import dcc, html
+from dash import callback, dcc, html, Input, Output, register_page
 from plotly.graph_objs._figure import Figure as plotly_figure
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
 
-layout_k_nearest_neighbors = html.Div(className='content', children=[
+register_page(__name__, path="/k-nearest-neighbors")
+
+layout = html.Div(className='content', children=[
     html.H1(className='content-title', children='k-Nearest Neighbors'),
     html.Div(
         className="resource-link",
@@ -39,12 +41,12 @@ layout_k_nearest_neighbors = html.Div(className='content', children=[
     html.Div(className='plot-parameters', children=[
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='n_neighbors'),
-            dcc.Input(className='parameter-value', id='knn-n-neighbors-input', value=5, min=1, max=250, step=1, type='number'),
+            dcc.Input(className='parameter-value', id='input-n-neighbors', value=5, min=1, max=250, step=1, type='number'),
         ]),
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='weights'),
             dcc.Dropdown(
-                id='knn-weights-input',
+                id='input-weights',
                 value='uniform',
                 options=[
                     {'label': 'uniform', 'value': 'uniform'},
@@ -56,7 +58,7 @@ layout_k_nearest_neighbors = html.Div(className='content', children=[
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='algorithm'),
             dcc.Dropdown(
-                id='knn-algorithm-input',
+                id='input-algorithm',
                 value='auto',
                 options=[
                     {'label': 'auto', 'value': 'auto'},
@@ -67,9 +69,7 @@ layout_k_nearest_neighbors = html.Div(className='content', children=[
             ),
         ]),
     ]),
-    html.Div(className='plots-distribution', children=[
-        html.Div(className='plot-full-width', children=[dcc.Graph(id='knn-plot')]),
-    ]),
+    html.Div(className='plot-full-width', children=[dcc.Graph(id='plot-knn')]),
     html.H2(className='section-title', children='Assumptions'),
     html.Div(className='paragraph', children=[
         html.P(children=[html.Strong("1. Similarity: "), "Data points within close proximity in the feature space are likely to belong to the same class or have similar labels."]),
@@ -97,6 +97,13 @@ layout_k_nearest_neighbors = html.Div(className='content', children=[
 ])
 
 
+@callback(
+    Output('plot-knn', 'figure'),
+    Input('input-n-neighbors', 'value'),
+    Input('input-weights', 'value'),
+    Input('input-algorithm', 'value'),
+    Input('button-new-data', 'n_clicks'),
+)
 def k_nearest_neighbors(
     n_neighbors: int,
     weights: str,
@@ -104,10 +111,12 @@ def k_nearest_neighbors(
     random_state: int,
 ) -> Tuple[plotly_figure, plotly_figure]:
     """
-    Update the normal distributions plots using the
-    new mean and standard deviation.
+    Generate training and testing data for a KNN model.
+    Train the model and make predictions.
+    Plot the results.
     """
 
+    # Step size when plotting the prediciton boundary
     step = 0.1
 
     # Generate a synthetic dataset
@@ -116,7 +125,7 @@ def k_nearest_neighbors(
     )
 
     # Split the dataset into training and test sets
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.5, random_state=1867)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.5, random_state=random_state)
 
     # Fit the KNN classifier on the training data
     knn = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm)
@@ -180,6 +189,7 @@ def k_nearest_neighbors(
         hovertemplate='x: %{x:.1f}<br>y: %{y:.1f}<br>Prediction: %{z:.0f}<extra></extra>',
     )
 
+    # Calculate the accuracy of the model
     accuracy = round(np.mean(np.equal(y_test, preds)) * 100, 1)
 
     # Create the figure and add the plots

@@ -1,14 +1,15 @@
 from typing import Tuple
 
 import numpy as np
-import plotly.express as px
 import plotly.graph_objects as go
-from dash import dcc, html
+from dash import callback, dcc, html, Input, Output, register_page
 from plotly.graph_objs._figure import Figure as plotly_figure
-from scipy.stats import norm, poisson, shapiro
+from scipy.stats import poisson
 
 
-layout_poisson = html.Div(className='content', children=[
+register_page(__name__, path="/poisson")
+
+layout = html.Div(className='content', children=[
     html.H1(className='content-title', children='Poisson Distribution'),
     html.Div(
         className="resource-link",
@@ -32,12 +33,12 @@ layout_poisson = html.Div(className='content', children=[
     html.Div(className='plot-parameters', children=[
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Lambda'),
-            dcc.Input(className='parameter-value', id='poisson-lambda-input', value=1, min=0, max=1000, step=0.1, type='number'),
+            dcc.Input(className='parameter-value', id='input-lambda', value=1, min=0, max=1000, step=0.1, type='number'),
         ]),
     ]),
-    html.Div(className='plots-distribution', children=[
-        html.Div(className='plot', children=[dcc.Graph(id='poisson-plot')]),
-        html.Div(className='plot', children=[dcc.Graph(id='poisson-cdf-plot')])
+    html.Div(className='plots-two', children=[
+        html.Div(className='plot', children=[dcc.Graph(id='plot-pdf')]),
+        html.Div(className='plot', children=[dcc.Graph(id='plot-cdf')]),
     ]),
     html.H2(className='section-title', children='Assumptions'),
     html.Div(className='paragraph', children=[
@@ -77,7 +78,7 @@ layout_poisson = html.Div(className='content', children=[
         html.P(children=["This plot can be generated using the code below it."]),
     ]),
     html.Button('Generate New Data', id='button-new-data', n_clicks=0),
-    dcc.Graph(id='histogram-plot'),
+    dcc.Graph(id='plot-histogram'),
     html.Div(className='paragraph', children=[
         html.Pre(
             '''
@@ -114,17 +115,29 @@ go.Figure(data=[histogram], layout=layout)
 ])
 
 
-def distribution_plots_poisson(
+@callback(
+    Output('plot-pdf', 'figure'),
+    Output('plot-cdf', 'figure'),
+    Input('input-lambda', 'value')
+)
+def pdf_cdf_poisson(
     lam: float,
 ) -> Tuple[plotly_figure, plotly_figure]:
     """
-    Update the poisson distributions plots using the new lambda value.
+    Plot the probability density function for a poisson distribution
+    and its cumulative density function.
     """
     # Only show x-axis values between 0 and 25
     x = np.arange(0, 26)
 
     y_pdf = poisson.pmf(x, lam)
-    fig_pdf = go.Figure(data=go.Scatter(x=x, y=y_pdf, hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>'))
+    fig_pdf = go.Figure(
+        data=go.Scatter(
+            x=x,
+            y=y_pdf,
+            hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>'
+        )
+    )
     fig_pdf.update_layout(
         title=dict(
             text='Probability Mass Function',
@@ -135,7 +148,13 @@ def distribution_plots_poisson(
     )
 
     y_cdf = poisson.cdf(x, lam)
-    fig_cdf = go.Figure(data=go.Scatter(x=x, y=y_cdf, hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>'))
+    fig_cdf = go.Figure(
+        data=go.Scatter(
+            x=x,
+            y=y_cdf,
+            hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>'
+        )
+    )
     fig_cdf.update_layout(
         title=dict(
             text='Cumulative Mass Function',
@@ -148,10 +167,15 @@ def distribution_plots_poisson(
     return fig_pdf, fig_cdf
 
 
-def histogram_poisson_plot() -> go.Figure:
+@callback(
+    Output('histogram-plot-poisson', 'figure', allow_duplicate=True),
+    Input('button-new-data', 'n_clicks'),
+    prevent_initial_call='initial_duplicate',
+)
+def histogram_poisson(n_clicks) -> go.Figure:
     """
-    Sample from a Poisson distribution, then generate a histogram
-    using this data.
+    Sample from a poisson distribution, then generate a histogram
+    using this data. Update the plot each time "button-new-data" is clicked.
     """
     
     # Set the parameters for sampling from a poisson distribution

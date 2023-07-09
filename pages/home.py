@@ -1,7 +1,9 @@
-from dash import html
+from dash import html, register_page
 
 
-layout_home = html.Div(className='content', children=[
+register_page(__name__, path="")
+
+layout = html.Div(className='content', children=[
     html.H1(
         className='content-title',
         children='Welcome to Statistical Stories!'
@@ -16,7 +18,7 @@ layout_home = html.Div(className='content', children=[
             "That's why I created Statistical Stories."
         ),
         html.P(
-            "Here you'll find easy to understand stories that explain the technical concepts in simple terms. "
+            "Here you'll find easy to understand stories that explain technical concepts in simple terms. "
         ),
         html.P(
             "You'll also be able to use interactive plots that visualize how distributions, algorithms, statistical tests, "

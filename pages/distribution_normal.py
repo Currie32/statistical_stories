@@ -2,12 +2,14 @@ from typing import Tuple
 
 import numpy as np
 import plotly.graph_objects as go
-from dash import dcc, html
+from dash import dcc, html, register_page, Input, Output, callback
 from plotly.graph_objs._figure import Figure as plotly_figure
-from scipy.stats import norm, shapiro, gaussian_kde
+from scipy.stats import norm
 
 
-layout_normal = html.Div(className='content', children=[
+register_page(__name__, path="/normal")
+
+layout = html.Div(className='content', children=[
     html.H1(className='content-title', children='Normal Distribution'),
     html.Div(
         className="resource-link",
@@ -28,16 +30,16 @@ layout_normal = html.Div(className='content', children=[
     html.Div(className='plot-parameters', children=[
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Mean'),
-            dcc.Input(className='parameter-value', id='normal-mean-input', value=0, min=-1000, max=1000, step=0.1, type='number'),
+            dcc.Input(className='parameter-value', id='mean-input', value=0, min=-1000, max=1000, step=0.1, type='number'),
         ]),
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Standard Deviation'),
-            dcc.Input(className='parameter-value', id='normal-std-input', value=1, min=-1000, max=1000, step=0.1, type='number'),
+            dcc.Input(className='parameter-value', id='std-input', value=1, min=-1000, max=1000, step=0.1, type='number'),
         ])
     ]),
-    html.Div(className='plots-distribution', children=[
-        html.Div(className='plot', children=[dcc.Graph(id='normal-plot')]),
-        html.Div(className='plot', children=[dcc.Graph(id='normal-cdf-plot')])
+    html.Div(className='plots-two', children=[
+        html.Div(className='plot', children=[dcc.Graph(id='plot-pdf')]),
+        html.Div(className='plot', children=[dcc.Graph(id='plot-cdf')])
     ]),
     html.H2(className='section-title', children='Assumptions'),
     html.Div(className='paragraph', children=[
@@ -80,7 +82,7 @@ layout_normal = html.Div(className='content', children=[
         html.P(children=["This plot can be generated using the code below it."]),
     ]),
     html.Button('Generate New Data', id='button-new-data', n_clicks=0),
-    dcc.Graph(id='histogram-plot'),
+    dcc.Graph(id='plot-histogram'),
     html.Div(className='paragraph', children=[
         html.Pre(
             '''
@@ -118,20 +120,33 @@ go.Figure(data=[histogram], layout=layout)
 ])
 
 
-def distribution_plots_normal(
+@callback(
+    Output('plot-pdf', 'figure', allow_duplicate=True),
+    Output('plot-cdf', 'figure', allow_duplicate=True),
+    Input('mean-input', 'value'),
+    Input('std-input', 'value'),
+    prevent_initial_call='initial_duplicate',
+)
+def pdf_cdf_normal(
     mean: float,
     std: float,
 ) -> Tuple[plotly_figure, plotly_figure]:
     """
-    Update the normal distributions plots using the
-    new mean and standard deviation.
+    Plot the probability density function for a normal distribution
+    and its cumulative density function.
     """
 
-    # Only show x-axis values between -10 and 10
+    # Only show x-axis values between -10 and 10, using 200 steps
     x = np.linspace(-10, 10, 200)
 
     y_pdf = norm.pdf(x, loc=mean, scale=std)
-    fig_pdf = go.Figure(data=go.Scatter(x=x, y=y_pdf, hovertemplate='x: %{x:.1f}<br>Probability Density: %{y:.2f}<extra></extra>',))
+    fig_pdf = go.Figure(
+        data=go.Scatter(
+            x=x,
+            y=y_pdf,
+            hovertemplate='x: %{x:.1f}<br>Probability Density: %{y:.2f}<extra></extra>'
+        )
+    )
     fig_pdf.update_layout(
         title=dict(
             text='Probability Density Function',
@@ -142,7 +157,13 @@ def distribution_plots_normal(
     )
 
     y_cdf = norm.cdf(x, loc=mean, scale=std)
-    fig_cdf = go.Figure(data=go.Scatter(x=x, y=y_cdf, hovertemplate='x: %{x:.1f}<br>Probability Density: %{y:.2f}<extra></extra>',))
+    fig_cdf = go.Figure(
+        data=go.Scatter(
+            x=x,
+            y=y_cdf,
+            hovertemplate='x: %{x:.1f}<br>Probability Density: %{y:.2f}<extra></extra>'
+        )
+    )
     fig_cdf.update_layout(
         title=dict(
             text='Cumulative Density Function',
@@ -155,10 +176,15 @@ def distribution_plots_normal(
     return fig_pdf, fig_cdf
 
 
-def histogram_normal_plot() -> Tuple[plotly_figure, str]:
+@callback(
+    Output('histogram-normal', 'figure', allow_duplicate=True),
+    Input('button-new-data', 'n_clicks'),
+    prevent_initial_call='initial_duplicate',
+)
+def histogram_normal(n_clicks: int) -> plotly_figure:
     """
     Sample from a normal distribution, then generate a histogram
-    using this data.
+    using this data. Update the plot each time "button-new-data" is clicked.
     """
     
     # Set the mean and standard deviation of the normal distribution
@@ -184,7 +210,6 @@ def histogram_normal_plot() -> Tuple[plotly_figure, str]:
         showlegend=True,
     )
 
-    # Create the plot
     fig = go.Figure(data=[histogram], layout=layout)
 
     return fig
