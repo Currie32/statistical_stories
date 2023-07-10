@@ -1,46 +1,46 @@
 #button-new-data {
     background-color: #05445E;
+    border-radius: 5px;
     color: white;
     font-size: 16px;
-    padding: 6px 10px;
-    border-radius: 5px;
     margin-top: 5px;
+    padding: 6px 10px;
 }
 .content {
     margin: 0 auto 60px;
     max-width: 800px;
 }
 .content-subtitle {
-    text-align: center;
-    margin: -5px auto 40px;
-    font-style: italic;
     color: #05445E;
-    font-weight: 200;
     font-size: 26px;
+    font-style: italic;
+    font-weight: 200;
+    margin: -5px auto 40px;
+    text-align: center;
 }
 .content-title {
+    font-size: 40px;
+    font-weight: 200;
     margin-top: 60px;
     text-align: center;
-    font-weight: 200;
-    font-size: 40px;
 }
 .paragraph {
-    margin: auto;
     font-size: 18px;
+    margin: auto;
 }
 .paragraph-italic {
-    margin: auto;
+    color: #555;
     font-size: 16px;
     font-style: italic;
-    color: #555;
+    margin: auto;
 }
 .paragraph-italic a {
     color: #555;
 }
 .parameter {
-    margin: 0px 15px;
     display: flex;
     flex-direction: column;
+    margin: 0px 15px;
     max-width: 150px;
 }
 .parameter-label {
@@ -49,13 +49,13 @@
     padding-left: 2px;
 }
 .parameter-value {
-    height: 36px;
-    line-height: 34px;
-    color: #333;
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 0px 10px;
+    color: #333;
+    height: 36px;
+    line-height: 34px;
     margin-bottom: 10px;
+    padding: 0px 10px;
 }
 .plot {
     display: inline-block;
@@ -65,9 +65,9 @@
     width: 100%;
 }
 .plot-parameters {
-    margin: 25px auto 0px;
-    justify-content: center;
     display: flex;
+    justify-content: center;
+    margin: 25px auto 0px;
 }
 .plots-two {
     display: flex;
@@ -86,13 +86,13 @@
     text-decoration: underline;
 }
 .section-title {
-    margin: 40px auto 20px;
     font-weight: 500;
+    margin: 40px auto 20px;
     text-decoration: underline;
 }
 .table-full-width {
-    width: 100%;
     margin-top: 25px;
+    width: 100%;
 }
 table {
     border-collapse: collapse;
@@ -117,8 +117,8 @@ table th {
     }
     .plot {
         display: block;
-        max-width: 100%;
         margin: 0px auto -40px;
+        max-width: 100%;
     }
     .plots-two {
         display: block;
@@ -134,8 +134,8 @@ table th {
 }
 @media (max-width: 500px) {
     .parameter {
-        max-width: 100px;
         margin: 0px 5px;
+        max-width: 100px;
     }
     .parameter-label {
         max-width: 100px;

@@ -7,8 +7,8 @@
     margin: 5px;
 }
 #button-navbar:hover {
-    cursor: pointer;
     background-color: rgb(220, 220, 220);
+    cursor: pointer;
 }
 
 /* Menus to select different pages */
@@ -20,8 +20,8 @@
     cursor: auto;
 }
 .dropdown-menu.show {
-    width: 252px;
     margin-left: -1px;
+    width: 252px;
 }
 .dropdown-toggle {
     background: #FFFFFF;
@@ -30,10 +30,10 @@
     padding: 8px 10px;
 }
 .dropdown-toggle::after {
+    color: #777777;
+    font-size: 18px;
     float: right;
     margin: 10px 2px 0px 0px;
-    font-size: 18px;
-    color: #777777;
 }
 
 #link-home {
@@ -41,14 +41,14 @@
     text-decoration: none;
 }
 #navbar {
-    width: 300px;
+    background-color: #05445E;
     height: 100vh;
     min-height: 100vh;
-    background-color: #05445E;
     padding: 0px 25px;
     position: fixed;
-    top: 0;
     left: 0;
+    top: 0;
+    width: 300px;
     z-index: 999;
 }
 .navbar-menu {
@@ -60,42 +60,38 @@
 }
 .navbar-title {
     color: white;
-    text-align: center;
-    font-weight: 400;
     font-size: 30px;
-    padding-top: 20px;
+    font-weight: 400;
     margin-bottom: 30px;
+    padding-top: 20px;
+    text-align: center;
 }
 #search-bar {
-    border-radius: 4px;
     border: 0px;
-    padding: 0px;
-    height: 40px;
-    width: 100%;
+    border-radius: 4px;
     color: #333;
+    height: 40px;
+    padding: 0px;
     padding-left: 10px;
+    width: 100%;
 }
-#search-bar::placeholder {
-    font-size: 16px;
+#search-bar::placeholder, #search-bar:valid {
     font-family:'Times New Roman', Times, serif;
-}
-#search-bar:valid {
     font-size: 16px;
-    font-family:'Times New Roman', Times, serif;
 }
 #search-results {
-    margin: 5px 0px 30px;
     background-color: #FFFFFF;
     border-radius: 4px;
     display: block;
+    margin: 5px 0px 30px;
     width: 250px;
 }
 #search-results a, #search-results p {
     color: #333;
-    text-decoration: none;
     display: block;
     padding: 3px 10px;
     width: fit-content;
+    text-decoration: none;
 }
 #search-results a:hover {
     color: rgb(13, 65, 190);
@@ -109,11 +105,11 @@
         display: block;
     }
     #navbar {
-        width: 100vw;
-        padding-bottom: 20px;
-        min-height: fit-content;
+        background-color: #05445E;
         height: fit-content;
-        background-color: #05445E;        
+        min-height: fit-content;
+        padding-bottom: 20px;
+        width: 100vw;
     }
     #navbar-menus {
         padding-top: 20px;
@@ -122,7 +118,7 @@
         width: calc(100vw - 50px);
     }
     .navbar-title {
-        padding: 0px;
         margin: auto;
+        padding: 0px;
     }
 }
