@@ -74,8 +74,13 @@ app.layout = html.Div([
         html.Div(id='content-body-wrapper', children=[
             dcc.Store(id="screen-width-store"),
             dcc.Location(id='url', refresh=False),
-            page_container
-        ])
+            page_container,
+            html.Div(id='footer', children=[
+                html.P("Statistical Stories. All rights reserved."),
+                html.P(className="footer-pipe", children=["|"]),
+                html.A("We're open source!", target="_blank", href="https://github.com/Currie32/statistical_stories")
+            ]),
+        ]),
     ])
 ])
 
@@ -91,7 +96,7 @@ app.clientside_callback(
 
 
 @app.callback(
-    Output('navbar-menus', 'className', allow_duplicate=True),
+    Output('navbar-menus', 'className'),
     Output('navbar-menus', 'style'),
     Output('button-navbar', 'className'),
     Output('content-body-wrapper', 'className'), 
@@ -101,7 +106,6 @@ app.clientside_callback(
     State('navbar-menus', 'className'),
     State('button-navbar', 'className'),
     State('content-body-wrapper', 'className'),
-    prevent_initial_call=True,
 )
 def display_navbar_menu_toggle(
     pathname: str,  # Not used but required input to close menu

@@ -1,5 +1,10 @@
 .paragraph-home {
-    margin: auto;
+    margin: 0px auto 150px;
     font-size: 18px;
     max-width: 600px;
+}
+@media (max-width: 500px) {
+    .paragraph-home {
+        margin: auto;
+    }
 }
