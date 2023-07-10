@@ -90,6 +90,11 @@
     margin: 40px auto 20px;
     text-decoration: underline;
 }
+.statistical-result {
+    font-size: 18px;
+    font-style: italic;
+    margin-top: 15px;
+}
 .table-full-width {
     margin-top: 25px;
     width: 100%;
