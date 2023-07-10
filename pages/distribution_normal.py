@@ -30,16 +30,16 @@ layout = html.Div(className='content', children=[
     html.Div(className='plot-parameters', children=[
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Mean'),
-            dcc.Input(className='parameter-value', id='mean-input', value=0, min=-1000, max=1000, step=0.1, type='number'),
+            dcc.Input(className='parameter-value', id='mean-input-normal', value=0, min=-1000, max=1000, step=0.1, type='number'),
         ]),
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Standard Deviation'),
-            dcc.Input(className='parameter-value', id='std-input', value=1, min=-1000, max=1000, step=0.1, type='number'),
+            dcc.Input(className='parameter-value', id='std-input-normal', value=1, min=-1000, max=1000, step=0.1, type='number'),
         ])
     ]),
     html.Div(className='plots-two', children=[
-        html.Div(className='plot', children=[dcc.Graph(id='plot-pdf')]),
-        html.Div(className='plot', children=[dcc.Graph(id='plot-cdf')])
+        html.Div(className='plot', children=[dcc.Graph(id='plot-pdf-normal')]),
+        html.Div(className='plot', children=[dcc.Graph(id='plot-cdf-normal')])
     ]),
     html.H2(className='section-title', children='Assumptions'),
     html.Div(className='paragraph', children=[
@@ -82,7 +82,7 @@ layout = html.Div(className='content', children=[
         html.P(children=["This plot can be generated using the code below it."]),
     ]),
     html.Button('Generate New Data', id='button-new-data', n_clicks=0),
-    dcc.Graph(id='plot-histogram'),
+    dcc.Graph(id='plot-histogram-normal'),
     html.Div(className='paragraph', children=[
         html.Pre(
             '''
@@ -121,11 +121,10 @@ go.Figure(data=[histogram], layout=layout)
 
 
 @callback(
-    Output('plot-pdf', 'figure', allow_duplicate=True),
-    Output('plot-cdf', 'figure', allow_duplicate=True),
-    Input('mean-input', 'value'),
-    Input('std-input', 'value'),
-    prevent_initial_call='initial_duplicate',
+    Output('plot-pdf-normal', 'figure'),
+    Output('plot-cdf-normal', 'figure'),
+    Input('mean-input-normal', 'value'),
+    Input('std-input-normal', 'value'),
 )
 def pdf_cdf_normal(
     mean: float,
@@ -177,9 +176,8 @@ def pdf_cdf_normal(
 
 
 @callback(
-    Output('histogram-normal', 'figure', allow_duplicate=True),
+    Output('plot-histogram-normal', 'figure'),
     Input('button-new-data', 'n_clicks'),
-    prevent_initial_call='initial_duplicate',
 )
 def histogram_normal(n_clicks: int) -> plotly_figure:
     """

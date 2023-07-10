@@ -135,7 +135,10 @@ table th {
 @media (max-width: 500px) {
     .parameter {
         max-width: 100px;
-        margin: 0px auto;
+        margin: 0px 5px;
+    }
+    .parameter-label {
+        max-width: 100px;
     }
     #plot-cdf, #plot-pdf, #plot-histogram {
         height: 350px;

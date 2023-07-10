@@ -33,12 +33,12 @@ layout = html.Div(className='content', children=[
     html.Div(className='plot-parameters', children=[
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Lambda'),
-            dcc.Input(className='parameter-value', id='input-lambda', value=1, min=0, max=1000, step=0.1, type='number'),
+            dcc.Input(className='parameter-value', id='input-lambda-poisson', value=1, min=0, max=1000, step=0.1, type='number'),
         ]),
     ]),
     html.Div(className='plots-two', children=[
-        html.Div(className='plot', children=[dcc.Graph(id='plot-pdf')]),
-        html.Div(className='plot', children=[dcc.Graph(id='plot-cdf')]),
+        html.Div(className='plot', children=[dcc.Graph(id='plot-pdf-poisson')]),
+        html.Div(className='plot', children=[dcc.Graph(id='plot-cdf-poisson')]),
     ]),
     html.H2(className='section-title', children='Assumptions'),
     html.Div(className='paragraph', children=[
@@ -78,7 +78,7 @@ layout = html.Div(className='content', children=[
         html.P(children=["This plot can be generated using the code below it."]),
     ]),
     html.Button('Generate New Data', id='button-new-data', n_clicks=0),
-    dcc.Graph(id='plot-histogram'),
+    dcc.Graph(id='plot-histogram-poisson'),
     html.Div(className='paragraph', children=[
         html.Pre(
             '''
@@ -116,9 +116,9 @@ go.Figure(data=[histogram], layout=layout)
 
 
 @callback(
-    Output('plot-pdf', 'figure'),
-    Output('plot-cdf', 'figure'),
-    Input('input-lambda', 'value')
+    Output('plot-pdf-poisson', 'figure'),
+    Output('plot-cdf-poisson', 'figure'),
+    Input('input-lambda-poisson', 'value')
 )
 def pdf_cdf_poisson(
     lam: float,
@@ -168,9 +168,8 @@ def pdf_cdf_poisson(
 
 
 @callback(
-    Output('histogram-plot-poisson', 'figure', allow_duplicate=True),
+    Output('plot-histogram-poisson', 'figure'),
     Input('button-new-data', 'n_clicks'),
-    prevent_initial_call='initial_duplicate',
 )
 def histogram_poisson(n_clicks) -> go.Figure:
     """

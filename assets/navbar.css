@@ -42,7 +42,6 @@
 }
 #navbar {
     width: 300px;
-    min-width: 250px;
     height: 100vh;
     min-height: 100vh;
     background-color: #05445E;
@@ -110,7 +109,7 @@
         display: block;
     }
     #navbar {
-        width: 100%;
+        width: 100vw;
         padding-bottom: 20px;
         min-height: fit-content;
         height: fit-content;
@@ -119,14 +118,11 @@
     #navbar-menus {
         padding-top: 20px;
     }
+    #navbar-menus, #search-bar, #search-results a:hover {
+        width: calc(100vw - 50px);
+    }
     .navbar-title {
         padding: 0px;
         margin: auto;
-    }
-    #search-bar {
-        width: calc(100vw - 50px);
-    }
-    #search-results a:hover {
-        width: calc(100vw - 70px);
     }
 }

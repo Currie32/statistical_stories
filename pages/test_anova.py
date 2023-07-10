@@ -38,27 +38,27 @@ layout = html.Div(className='content', children=[
     html.Div(className='plot-parameters', children=[
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Mean (A)'),
-            dcc.Input(className='parameter-value', id='input-mean-group-a', value=20, min=0, max=100, step=1, type='number'),
+            dcc.Input(className='parameter-value', id='input-mean-a-anova', value=20, min=0, max=100, step=1, type='number'),
             html.Label(className='parameter-label', children='Std Dev (A)'),
-            dcc.Input(className='parameter-value', id='input-std-group-a', value=6, min=1, max=100, step=1, type='number'),
+            dcc.Input(className='parameter-value', id='input-std-a-anova', value=6, min=1, max=100, step=1, type='number'),
             html.Label(className='parameter-label', children='Samples (A)'),
-            dcc.Input(className='parameter-value', id='input-samples-group-a', value=28, min=1, max=100, step=1, type='number'),
+            dcc.Input(className='parameter-value', id='input-samples-a-anova', value=28, min=1, max=100, step=1, type='number'),
         ]),
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Mean (B)'),
-            dcc.Input(className='parameter-value', id='input-mean-group-b', value=22, min=0, max=100, step=1, type='number'),
+            dcc.Input(className='parameter-value', id='input-mean-b-anova', value=22, min=0, max=100, step=1, type='number'),
             html.Label(className='parameter-label', children='Std Dev (B)'),
-            dcc.Input(className='parameter-value', id='input-std-group-b', value=7, min=1, max=100, step=1, type='number'),
+            dcc.Input(className='parameter-value', id='input-std-b-anova', value=7, min=1, max=100, step=1, type='number'),
             html.Label(className='parameter-label', children='Samples (B)'),
-            dcc.Input(className='parameter-value', id='input-samples-group-b', value=10, min=1, max=100, step=1, type='number'),
+            dcc.Input(className='parameter-value', id='input-samples-b-anova', value=10, min=1, max=100, step=1, type='number'),
         ]),
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='Mean (C)'),
-            dcc.Input(className='parameter-value', id='input-mean-group-c', value=18, min=0, max=100, step=1, type='number'),
+            dcc.Input(className='parameter-value', id='input-mean-c-anova', value=18, min=0, max=100, step=1, type='number'),
             html.Label(className='parameter-label', children='Std Dev (C)'),
-            dcc.Input(className='parameter-value', id='input-std-group-c', value=5, min=1, max=100, step=1, type='number'),
+            dcc.Input(className='parameter-value', id='input-std-c-anova', value=5, min=1, max=100, step=1, type='number'),
             html.Label(className='parameter-label', children='Samples (C)'),
-            dcc.Input(className='parameter-value', id='input-samples-group-c', value=18, min=1, max=100, step=1, type='number'),
+            dcc.Input(className='parameter-value', id='input-samples-c-anova', value=18, min=1, max=100, step=1, type='number'),
         ]),
     ]),
     html.Div(className='table-full-width', children=[html.Table(id='table-anova')]),
@@ -142,15 +142,15 @@ layout = html.Div(className='content', children=[
     Output('table-anova', 'children'),
     Output('plot-anova', 'figure'),
     Input('button-new-data', 'n_clicks'),
-    Input('input-mean-group-a', 'value'),
-    Input('input-std-group-a', 'value'),
-    Input('input-samples-group-a', 'value'),
-    Input('input-mean-group-b', 'value'),
-    Input('input-std-group-b', 'value'),
-    Input('input-samples-group-b', 'value'),
-    Input('input-mean-group-c', 'value'),
-    Input('input-std-group-c', 'value'),
-    Input('input-samples-group-c', 'value'),
+    Input('input-mean-a-anova', 'value'),
+    Input('input-std-a-anova', 'value'),
+    Input('input-samples-a-anova', 'value'),
+    Input('input-mean-b-anova', 'value'),
+    Input('input-std-b-anova', 'value'),
+    Input('input-samples-b-anova', 'value'),
+    Input('input-mean-c-anova', 'value'),
+    Input('input-std-c-anova', 'value'),
+    Input('input-samples-c-anova', 'value'),
 )
 def anova(
     n_clicks: int, # Not used, but a required input to generate new data
@@ -181,7 +181,7 @@ def anova(
     anova_table = sm.stats.anova_lm(model, typ=2)
     
     table = html.Table(
-        id='anova-table',
+        id='table-anova',
         children=[
             html.Thead(html.Tr([
                 html.Th("Source of Variation"),

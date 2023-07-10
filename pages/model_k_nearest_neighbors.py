@@ -41,12 +41,12 @@ layout = html.Div(className='content', children=[
     html.Div(className='plot-parameters', children=[
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='n_neighbors'),
-            dcc.Input(className='parameter-value', id='input-n-neighbors', value=5, min=1, max=250, step=1, type='number'),
+            dcc.Input(className='parameter-value', id='input-n-neighbors-knn', value=5, min=1, max=250, step=1, type='number'),
         ]),
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='weights'),
             dcc.Dropdown(
-                id='input-weights',
+                id='input-weights-knn',
                 value='uniform',
                 options=[
                     {'label': 'uniform', 'value': 'uniform'},
@@ -58,7 +58,7 @@ layout = html.Div(className='content', children=[
         html.Div(className='parameter', children=[
             html.Label(className='parameter-label', children='algorithm'),
             dcc.Dropdown(
-                id='input-algorithm',
+                id='input-algorithm-knn',
                 value='auto',
                 options=[
                     {'label': 'auto', 'value': 'auto'},
@@ -99,9 +99,9 @@ layout = html.Div(className='content', children=[
 
 @callback(
     Output('plot-knn', 'figure'),
-    Input('input-n-neighbors', 'value'),
-    Input('input-weights', 'value'),
-    Input('input-algorithm', 'value'),
+    Input('input-n-neighbors-knn', 'value'),
+    Input('input-weights-knn', 'value'),
+    Input('input-algorithm-knn', 'value'),
     Input('button-new-data', 'n_clicks'),
 )
 def k_nearest_neighbors(
