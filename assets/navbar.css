@@ -1,0 +1,124 @@
+#button-navbar {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    color: #05445E;
+    display: none;
+    font-size: 24px;
+    margin: 5px;
+}
+#button-navbar:hover {
+    background-color: rgb(220, 220, 220);
+    cursor: pointer;
+}
+
+/* Menus to select different pages */
+.dropdown-item a {
+    text-decoration: none;
+}
+.dropdown-item:hover {
+    background-color: #FFFFFF;
+    cursor: auto;
+}
+.dropdown-menu.show {
+    margin-left: -1px;
+    width: 252px;
+}
+.dropdown-toggle {
+    background: #FFFFFF;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    padding: 8px 10px;
+}
+.dropdown-toggle::after {
+    color: #777777;
+    font-size: 18px;
+    float: right;
+    margin: 10px 2px 0px 0px;
+}
+
+#link-home {
+    color: white;
+    text-decoration: none;
+}
+#navbar {
+    background-color: #05445E;
+    height: 100vh;
+    min-height: 100vh;
+    padding: 0px 25px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 300px;
+    z-index: 999;
+}
+.navbar-menu {
+    margin-bottom: 5px;
+}
+#navbar-menus {    
+    color: black;
+    display: block;
+}
+.navbar-title {
+    color: white;
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    text-align: center;
+}
+#search-bar {
+    border: 0px;
+    border-radius: 4px;
+    color: #333;
+    height: 40px;
+    padding: 0px;
+    padding-left: 10px;
+    width: 100%;
+}
+#search-bar::placeholder, #search-bar:valid {
+    font-family:'Times New Roman', Times, serif;
+    font-size: 16px;
+}
+#search-results {
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    display: block;
+    margin: 5px 0px 30px;
+    width: 250px;
+}
+#search-results a, #search-results p {
+    color: #333;
+    display: block;
+    padding: 3px 10px;
+    width: fit-content;
+    text-decoration: none;
+}
+#search-results a:hover {
+    color: rgb(13, 65, 190);
+}
+@media (max-width: 800px) {
+    .button-menu-and-title {
+        display: flex;
+        padding-top: 20px;
+    }
+    #button-navbar {
+        display: block;
+    }
+    #navbar {
+        background-color: #05445E;
+        height: fit-content;
+        min-height: fit-content;
+        padding-bottom: 20px;
+        width: 100vw;
+    }
+    #navbar-menus {
+        padding-top: 20px;
+    }
+    #navbar-menus, #search-bar, #search-results a:hover {
+        width: calc(100vw - 50px);
+    }
+    .navbar-title {
+        margin: auto;
+        padding: 0px;
+    }
+}

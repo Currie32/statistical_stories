@@ -1,0 +1,149 @@
+#button-new-data {
+    background-color: #05445E;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    margin-top: 5px;
+    padding: 6px 10px;
+}
+.content {
+    margin: 0 auto 60px;
+    max-width: 800px;
+}
+.content-subtitle {
+    color: #05445E;
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 200;
+    margin: -5px auto 40px;
+    text-align: center;
+}
+.content-title {
+    font-size: 40px;
+    font-weight: 200;
+    margin-top: 60px;
+    text-align: center;
+}
+.paragraph {
+    font-size: 18px;
+    margin: auto;
+}
+.paragraph-italic {
+    color: #555;
+    font-size: 16px;
+    font-style: italic;
+    margin: auto;
+}
+.paragraph-italic a {
+    color: #555;
+}
+.parameter {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 15px;
+    max-width: 150px;
+}
+.parameter-label {
+    margin-bottom: 5px;
+    min-width: 200px;
+    padding-left: 2px;
+}
+.parameter-value {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    height: 36px;
+    line-height: 34px;
+    margin-bottom: 10px;
+    padding: 0px 10px;
+}
+.plot {
+    display: inline-block;
+    max-width: 50%;
+}
+.plot-full-width {
+    width: 100%;
+}
+.plot-parameters {
+    display: flex;
+    justify-content: center;
+    margin: 25px auto 0px;
+}
+.plots-two {
+    display: flex;
+    margin: 0px auto -40px;
+}
+.resource-link {
+    margin-bottom: -40px;
+    text-align: right;
+}
+.resource-link a {
+    color: #05445E;
+    font-style: italic;
+    text-decoration: none;
+}
+.resource-link a:hover {
+    text-decoration: underline;
+}
+.section-title {
+    font-weight: 500;
+    margin: 40px auto 20px;
+    text-decoration: underline;
+}
+.table-full-width {
+    margin-top: 25px;
+    width: 100%;
+}
+table {
+    border-collapse: collapse;
+    margin: 0px auto;
+}
+table td, table th {
+    border: 1px solid black;
+    padding: 8px;
+}
+table th {
+    background-color: #05445E;
+    color: #fafafa;
+}
+@media (max-width: 1200px) {
+    .content {
+        max-width: 600px;
+    }
+}
+@media (max-width: 1000px) {
+    .content {
+        max-width: 400px;
+    }
+    .plot {
+        display: block;
+        margin: 0px auto -40px;
+        max-width: 100%;
+    }
+    .plots-two {
+        display: block;
+    }
+}
+@media (max-width: 800px) {
+    .content {
+        max-width: 100%;
+    }
+    .content-title {
+        margin-top: 120px;
+    }
+}
+@media (max-width: 500px) {
+    .parameter {
+        margin: 0px 5px;
+        max-width: 100px;
+    }
+    .parameter-label {
+        max-width: 100px;
+    }
+    #plot-cdf, #plot-pdf, #plot-histogram {
+        height: 350px;
+    }
+    table {
+        font-size: 12px;
+    }
+}
