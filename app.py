@@ -64,6 +64,7 @@ app.layout = html.Div([
                 dbc.DropdownMenu(
                     children=[
                         dbc.DropdownMenuItem(dcc.Link("ANOVA", href="/anova")),
+                        dbc.DropdownMenuItem(dcc.Link("Chi-square", href="/chi-square")),
                     ],
                     nav=True,
                     in_navbar=True,
@@ -165,7 +166,8 @@ def search_pages(
         {'title': 'Normal distribution', 'path': 'pages/distribution_normal.py', 'url': '/normal'},
         {'title': 'Poisson distribution', 'path': 'pages/distribution_poisson.py', 'url': '/poisson'},
         {'title': 'k-Nearest Neighbors', 'path': 'pages/model_k_nearest_neighbors.py', 'url': '/k-nearest-neighbors'},
-        {'title': 'ANOVA', 'path': 'pages/test_anova.py', 'url': 'anova'},
+        {'title': 'ANOVA', 'path': 'pages/test_anova.py', 'url': '/anova'},
+        {'title': 'Chi-Square', 'path': 'pages/test_chi_square.py', 'url': '/chi-square'},
     ]
 
     # Append pages that match the search query
@@ -185,6 +187,18 @@ def search_pages(
     # If no matching pages are found, display a message
     else:
         return html.P('No matching pages found.'), {'padding': '10px 10px 1px'}, no_update
+
+
+@app.callback(
+    Output('search-bar', 'value'),
+    Input('search-results', 'n_clicks'),
+    State('url', 'pathname'),
+)
+def reset_search_bar_text(clicks, url):
+    """
+    Reset the search bar's text when a result is clicked on.
+    """
+    return ""
         
 
 if __name__ == '__main__':
