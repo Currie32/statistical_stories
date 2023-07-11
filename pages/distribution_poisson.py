@@ -114,7 +114,7 @@ layout = go.Layout(
 )
 
 # Create the plot
-fig = go.Figure(data=[histogram], layout=layout)
+go.Figure(data=[histogram], layout=layout)
             ''')
     ])
 ])
