@@ -78,6 +78,12 @@ layout = html.Div(className='content', children=[
         html.P(children=["This plot can be generated using the code below it."]),
     ]),
     html.Button('Generate New Data', id='button-new-data', n_clicks=0),
+    html.Div(className='plot-parameters', children=[
+        html.Div(className='parameter', children=[
+            html.Label(className='parameter-label', children='Lambda'),
+            dcc.Input(className='parameter-value', id='input-lambda-poisson-histogram', value=3, min=0, max=100, step=0.1, type='number'),
+        ]),
+    ]),
     dcc.Graph(id='plot-histogram-poisson'),
     html.Div(className='paragraph', children=[
         html.Pre(
@@ -87,24 +93,23 @@ import plotly.graph_objects as go
 
 
 # Set the parameters for sampling from a poisson distribution
-lmbda = 2.0
+lmbda = 3.0
 samples = 1000
-
 sample = np.random.poisson(lmbda, samples)
 
 histogram = go.Histogram(
     x=sample,
-    histnorm='probability density',
+    histnorm='probability',
     opacity=0.7,
     marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
     showlegend=False,
-    hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>',
+    hovertemplate='# events: %{x:.0f}<br>Probability: %{y:.2f}<extra></extra>',
 )
 
 layout = go.Layout(
     title='Poisson Distribution',
-    xaxis=dict(title='Value', range=[-4, 10]),
-    yaxis=dict(title='Probability Density'),
+    xaxis=dict(title='Number of Events', range=[-1, 20]),
+    yaxis=dict(title='Probability'),
     showlegend=True,
 )
 
@@ -120,11 +125,11 @@ go.Figure(data=[histogram], layout=layout)
     Output('plot-cdf-poisson', 'figure'),
     Input('input-lambda-poisson', 'value')
 )
-def pdf_cdf_poisson(
+def pmf_cdf_poisson(
     lam: float,
 ) -> Tuple[plotly_figure, plotly_figure]:
     """
-    Plot the probability density function for a poisson distribution
+    Plot the probability mass function for a poisson distribution
     and its cumulative density function.
     """
     # Only show x-axis values between 0 and 25
@@ -132,10 +137,10 @@ def pdf_cdf_poisson(
 
     y_pdf = poisson.pmf(x, lam)
     fig_pdf = go.Figure(
-        data=go.Scatter(
+        data=go.Bar(
             x=x,
             y=y_pdf,
-            hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>'
+            hovertemplate='# events: %{x:.0f}<br>Probability: %{y:.2f}<extra></extra>'
         )
     )
     fig_pdf.update_layout(
@@ -143,25 +148,25 @@ def pdf_cdf_poisson(
             text='Probability Mass Function',
             x=0.5,
         ),
-        xaxis=dict(title='X'),
-        yaxis=dict(title='Probability Density'),
+        xaxis=dict(title='Number of Events'),
+        yaxis=dict(title='Probability'),
     )
 
     y_cdf = poisson.cdf(x, lam)
     fig_cdf = go.Figure(
-        data=go.Scatter(
+        data=go.Bar(
             x=x,
             y=y_cdf,
-            hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>'
+            hovertemplate='# events: %{x:.0f}<br>Probability: %{y:.2f}<extra></extra>'
         )
     )
     fig_cdf.update_layout(
         title=dict(
-            text='Cumulative Mass Function',
+            text='Cumulative Distribution Function',
             x=0.5,
         ),
-        xaxis=dict(title='X'),
-        yaxis=dict(title='Probability Density'),
+        xaxis=dict(title='Number of Events'),
+        yaxis=dict(title='Probability'),
     )
 
     return fig_pdf, fig_cdf
@@ -170,32 +175,31 @@ def pdf_cdf_poisson(
 @callback(
     Output('plot-histogram-poisson', 'figure'),
     Input('button-new-data', 'n_clicks'),
+    Input('input-lambda-poisson-histogram', 'value'),
 )
-def histogram_poisson(n_clicks) -> go.Figure:
+def histogram_poisson(n_clicks: int, lmbda: float) -> go.Figure:
     """
     Sample from a poisson distribution, then generate a histogram
-    using this data. Update the plot each time "button-new-data" is clicked.
+    using this data. Update the plot each time "button-new-data" is clicked,
+    or the lambda value is changed.
     """
-    
-    # Set the parameters for sampling from a poisson distribution
-    lmbda = 2.0
+ 
     samples = 1000
-
     sample = np.random.poisson(lmbda, samples)
 
     histogram = go.Histogram(
         x=sample,
-        histnorm='probability density',
+        histnorm='probability',
         opacity=0.7,
         marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
         showlegend=False,
-        hovertemplate='x: %{x:.0f}<br>Probability Density: %{y:.2f}<extra></extra>',
+        hovertemplate='# events: %{x:.0f}<br>Probability: %{y:.2f}<extra></extra>',
     )
 
     layout = go.Layout(
         title='Poisson Distribution',
-        xaxis=dict(title='X', range=[-4, 10]),
-        yaxis=dict(title='Probability Density'),
+        xaxis=dict(title='Number of Events', range=[-1, 20]),
+        yaxis=dict(title='Probability'),
         showlegend=True,
     )
 

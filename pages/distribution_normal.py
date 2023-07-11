@@ -82,6 +82,16 @@ layout = html.Div(className='content', children=[
         html.P(children=["This plot can be generated using the code below it."]),
     ]),
     html.Button('Generate New Data', id='button-new-data', n_clicks=0),
+    html.Div(className='plot-parameters', children=[
+        html.Div(className='parameter', children=[
+            html.Label(className='parameter-label', children='Mean'),
+            dcc.Input(className='parameter-value', id='mean-input-normal-histogram', value=0, min=-1000, max=1000, step=0.1, type='number'),
+        ]),
+        html.Div(className='parameter', children=[
+            html.Label(className='parameter-label', children='Standard Deviation'),
+            dcc.Input(className='parameter-value', id='std-input-normal-histogram', value=1, min=-1000, max=1000, step=0.1, type='number'),
+        ])
+    ]),
     dcc.Graph(id='plot-histogram-normal'),
     html.Div(className='paragraph', children=[
         html.Pre(
@@ -89,31 +99,27 @@ layout = html.Div(className='content', children=[
 import numpy as np
 import plotly.graph_objects as go
 
-
-# Set the parameters for sampling from a normal distribution
-mu = 0  # Mean
-sigma = 1  # Standard deviation
+mean = 0
+std = 1
 samples = 1000
-
-sample = np.random.normal(mu, sigma, samples)
+sample = np.random.normal(mean, std, samples)
 
 histogram = go.Histogram(
     x=sample,
-    histnorm='probability density',
+    histnorm='probability',
     opacity=0.7,
     marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
     showlegend=False,
-    hovertemplate='x: %{x:.1f}<br>Probability Density: %{y:.2f}<extra></extra>',
+    hovertemplate='x: %{x:.1f}<br>Probability: %{y:.2f}<extra></extra>',
 )
 
 layout = go.Layout(
     title='Normal Distribution',
-    xaxis=dict(title='Value', range=[-4, 4]),
-    yaxis=dict(title='Probability Density'),
+    xaxis=dict(title='X', range=[-5, 5]),
+    yaxis=dict(title='Probability'),
     showlegend=True,
 )
 
-# Create the plot
 go.Figure(data=[histogram], layout=layout)
             ''')
     ])
@@ -178,33 +184,36 @@ def pdf_cdf_normal(
 @callback(
     Output('plot-histogram-normal', 'figure'),
     Input('button-new-data', 'n_clicks'),
+    Input('mean-input-normal-histogram', 'value'),
+    Input('std-input-normal-histogram', 'value'),
 )
-def histogram_normal(n_clicks: int) -> plotly_figure:
+def histogram_normal(
+    n_clicks: int,
+    mean: float,
+    std: float,
+) -> plotly_figure:
     """
     Sample from a normal distribution, then generate a histogram
-    using this data. Update the plot each time "button-new-data" is clicked.
+    using this data. Update the plot each time "button-new-data" is clicked,
+    or one of the sampling parameters.
     """
     
-    # Set the mean and standard deviation of the normal distribution
-    mu = 0  # Mean
-    sigma = 1  # Standard deviation
     samples = 1000
-
-    sample = np.random.normal(mu, sigma, samples)
+    sample = np.random.normal(mean, std, samples)
 
     histogram = go.Histogram(
         x=sample,
-        histnorm='probability density',
+        histnorm='probability',
         opacity=0.7,
         marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
         showlegend=False,
-        hovertemplate='x: %{x:.1f}<br>Probability Density: %{y:.2f}<extra></extra>',
+        hovertemplate='x: %{x:.1f}<br>Probability: %{y:.2f}<extra></extra>',
     )
 
     layout = go.Layout(
         title='Normal Distribution',
-        xaxis=dict(title='X', range=[-4, 4]),
-        yaxis=dict(title='Probability Density'),
+        xaxis=dict(title='X', range=[-5, 5]),
+        yaxis=dict(title='Probability'),
         showlegend=True,
     )
 

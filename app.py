@@ -46,8 +46,9 @@ app.layout = html.Div([
                 ]),
                 dbc.DropdownMenu(
                     children=[
-                        dbc.DropdownMenuItem(dcc.Link("Normal Distribution", href="/normal")),
-                        dbc.DropdownMenuItem(dcc.Link("Poisson Distribution", href="/poisson")),
+                        dbc.DropdownMenuItem(dcc.Link("Negative Binomial", href="/negative-binomial")),
+                        dbc.DropdownMenuItem(dcc.Link("Normal", href="/normal")),
+                        dbc.DropdownMenuItem(dcc.Link("Poisson", href="/poisson")),
                     ],
                     nav=True,
                     in_navbar=True,
@@ -163,11 +164,12 @@ def search_pages(
 
     # Pages of the website that can be searched
     pages = [
+        {'title': 'Negative binomial distribution', 'path': 'pages/distribution_negative_binomial.py', 'url': '/negative-binomial'},
         {'title': 'Normal distribution', 'path': 'pages/distribution_normal.py', 'url': '/normal'},
         {'title': 'Poisson distribution', 'path': 'pages/distribution_poisson.py', 'url': '/poisson'},
-        {'title': 'k-Nearest Neighbors', 'path': 'pages/model_k_nearest_neighbors.py', 'url': '/k-nearest-neighbors'},
+        {'title': 'k-nearest neighbors', 'path': 'pages/model_k_nearest_neighbors.py', 'url': '/k-nearest-neighbors'},
         {'title': 'ANOVA', 'path': 'pages/test_anova.py', 'url': '/anova'},
-        {'title': 'Chi-Square', 'path': 'pages/test_chi_square.py', 'url': '/chi-square'},
+        {'title': 'Chi-square', 'path': 'pages/test_chi_square.py', 'url': '/chi-square'},
     ]
 
     # Append pages that match the search query
