@@ -5,12 +5,16 @@
   	    <lastmod>2023-07-09T10:30:00+00:00</lastmod>
 	</url>
 	<url>
+		<loc>https://statisticalstories.xyz/negative-binomial</loc>
+		<lastmod>2023-07-11T11:30:00+00:00</lastmod>
+	</url>
+	<url>
 		<loc>https://statisticalstories.xyz/normal</loc>
-		<lastmod>2023-07-09T10:30:00+00:00</lastmod>
+		<lastmod>2023-07-11T11:30:00+00:00</lastmod>
 	</url>
 	<url>
 		<loc>https://statisticalstories.xyz/poisson</loc>
-		<lastmod>2023-07-09T10:30:00+00:00</lastmod>
+		<lastmod>2023-07-11T11:30:00+00:00</lastmod>
 	</url>
     <url>
 		<loc>https://statisticalstories.xyz/k-nearest-neighbors</loc>
