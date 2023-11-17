@@ -28,6 +28,10 @@ pre {
     justify-content: center;
     margin-left: 300px;
 }
+#terms {
+    margin: 50px auto;
+    max-width: 600px;
+}
 @media (max-width: 800px) {
     #content-body-wrapper {
         margin-left: 0px

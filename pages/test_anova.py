@@ -21,7 +21,7 @@ layout = html.Div(className='content', children=[
     html.Div(className='paragraph', children=[
         html.P("Once upon a time, there was an orchard owner named Dave. His orchard was filled with three types of fruit-bearing trees: Apple, Orange, and Mango. Dave loved experimenting with his trees and was always curious to see if there were any significant differences between their yields."),
         html.P("One sunny day, Dave decided to explore a statistical tool called ANOVA, short for Analysis of Variance, to help him understand the differences in yield among his orchard trees."),
-        html.P("To begin his investigation, Dave carefully selected ten random apples trees, ten orange trees, and ten mango trees. He carefully noted down all the data and organized it in a table."),
+        html.P("To begin his investigation, Dave carefully selected ten random apple trees, ten orange trees, and ten mango trees. He carefully noted down all the data and organized it in a table."),
         html.P("To apply ANOVA to his data, Dave needed to calculate the average yield for each tree type. After calculating this, Dave discovered that the Apple trees had an average yield of 200 fruits, the Orange trees had an average yield of 180 fruits, and the Mango trees had an average yield of 220 fruits."),
         html.P("Curiosity piqued, Dave wondered if these differences were statistically significant or simply due to random chance. He knew that ANOVA could help him find out."),
         html.P("Dave learned that ANOVA compares two types of variability: the variability within each group and the variability between the groups."),

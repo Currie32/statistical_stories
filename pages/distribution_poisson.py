@@ -17,9 +17,9 @@ layout = html.Div(className='content', children=[
     ),
     html.H2(className='section-title', children='Overview'),
     html.Div(className='paragraph', children=[
-        html.P("Once upon a time there was a bakery run by a friendly baker named Dave. After years of baking, Dave noticed that during the morning rush the number of croissants that he would sell could change every hour."),
+        html.P("Once upon a time, there was a bakery run by a friendly baker named Dave. After years of baking, Dave noticed that during the morning rush the number of croissants that he would sell could change every hour."),
         html.P("Curious to discover a pattern, Dave started keeping track of the number of croissants he sold during each hour. He recorded the data for several days and noticed something fascinating. Some hours he sold exactly 10 croissants, while in other hours he sold slightly more or slightly fewer."),
-        html.P("Dave wondered if there was a way to predict the number of croissants he would sell in a given hour. He visited his friend, Dan, who was a mathematician, and shared his data with him."),
+        html.P("Dave wondered if there was a way to predict the number of croissants he would sell in a given hour. He visited his friend, Dan, who was a mathematician and shared his data with him."),
         html.P('Dan smiled and said, “Dave, what you\'re experiencing is an example of the Poisson distribution." He explained that the Poisson distribution helps us understand the number of events that occur over a fixed period of time or space.'),
         html.P('Dan continued, "The Poisson distribution tells us the probability of selling a certain number of croissants in an hour. The average number of croissants you sell per hour is called the lambda (λ). In your case, λ is 10 since that\'s the average number of croissants you sell during the morning rush."'),
         html.P('Dan added, “Another interesting quality of the Poisson distribution is that the variance (σ^2) is equal to the average. This means that if you were to sell more croissants every hour during the morning rush, the variability of the number of croissants sold would also increase.”'),
@@ -65,8 +65,8 @@ layout = html.Div(className='content', children=[
     ]),
     html.H2(className='section-title', children='Examples'),
     html.Div(className='paragraph', children=[
-        html.P(children=["1. The arrival of phone calls at a call center or the number of emails received per minute."]),
-        html.P(children=["2. The number of defects or errors that occurred during a production process."]),
+        html.P(children=["1. The arrival of phone calls at a call centre or the number of emails received per minute."]),
+        html.P(children=["2. The number of defects or errors that occur during a production process."]),
         html.P(children=["3. The occurrence of insurance claims, such as car accidents or property damage."]),
         html.P(children=["4. The number of customers arriving at a store during a specific time period."]),
         html.P(children=["5. The frequency of certain medical events, such as hospital admissions for a specific condition."]),
