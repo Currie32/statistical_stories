@@ -1,31 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	<url>
+<sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd">
+	<sitemap>
 		<loc>https://statisticalstories.xyz/</loc>
-  	    <lastmod>2023-07-09T10:30:00+00:00</lastmod>
-	</url>
-	<url>
+  	    <lastmod>2023-11-16T21:30:00+00:00</lastmod>
+	</sitemap>
+	<sitemap>
 		<loc>https://statisticalstories.xyz/negative-binomial</loc>
 		<lastmod>2023-07-11T11:30:00+00:00</lastmod>
-	</url>
-	<url>
+	</sitemap>
+	<sitemap>
 		<loc>https://statisticalstories.xyz/normal</loc>
 		<lastmod>2023-07-11T11:30:00+00:00</lastmod>
-	</url>
-	<url>
+	</sitemap>
+	<sitemap>
 		<loc>https://statisticalstories.xyz/poisson</loc>
 		<lastmod>2023-07-11T11:30:00+00:00</lastmod>
-	</url>
-    <url>
+	</sitemap>
+    <sitemap>
 		<loc>https://statisticalstories.xyz/k-nearest-neighbors</loc>
 		<lastmod>2023-07-09T10:30:00+00:00</lastmod>
-	</url>
-    <url>
+	</sitemap>
+    <sitemap>
 		<loc>https://statisticalstories.xyz/anova</loc>
 		<lastmod>2023-07-09T10:30:00+00:00</lastmod>
-	</url>
-	<url>
+	</sitemap>
+	<sitemap>
 		<loc>https://statisticalstories.xyz/chi-square</loc>
 		<lastmod>2023-07-10T16:30:00+00:00</lastmod>
-	</url>
-</urlset>
+	</sitemap>
+	<sitemap>
+		<loc>https://statisticalstories.xyz/terms</loc>
+		<lastmod>2023-11-16T21:30:00+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>https://statisticalstories.xyz/privacy_policy</loc>
+		<lastmod>2023-11-16T21:30:00+00:00</lastmod>
+	</sitemap>
+</sitemapindex>

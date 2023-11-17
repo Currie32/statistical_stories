@@ -5,6 +5,8 @@ from dash import Dash, dcc, html, no_update, page_container
 from dash.dependencies import Input, Output, State
 from flask import send_from_directory
 
+from footer import footer
+
 
 app = Dash(
     __name__,
@@ -23,6 +25,48 @@ def serve_robots():
 @server.route('/sitemap.xml')
 def serve_sitemap():
     return send_from_directory('.', 'sitemap.xml', mimetype='application/xml')
+
+
+app.index_string = """<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-977RPT7S59"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-977RPT7S59');
+        </script>
+        <meta charset="UTF-8">
+        <meta name="description" content="Learn about statistics and data sciences with stories and interactive visualizations.">
+        <meta name="keywords" content="statistics, data science, probability, intro to statistics, stats">
+        <meta property="og:title" content="Statistical Stories">
+        <meta property="og:description" content="Learn about statistics and data sciences with stories and interactive visualizations.">
+        <meta property="og:image" content="https://statisticalstories.xyz/assets/favicon.ico">
+        <meta property="og:url" content="https://statisticalstories.xyz">
+        <meta name="twitter:card" content="https://statisticalstories.xyz/assets/favicon.ico">
+        <meta name="twitter:title" content="Statistical Stories">
+        <meta name="twitter:description" content="Learn about statistics and data sciences with stories and interactive visualizations.">
+        <meta name="twitter:image" content="https://statisticalstories.xyz/assets/favicon.ico">
+        <meta name="google-adsense-account" content="ca-pub-4657073290295216">
+        <link rel="canonical" href="https://statisticalstories.xyz">
+        <meta name="robots" content="index, follow">
+        {%metas%}
+        <title>{%title%}</title>
+        {%favicon%}
+        {%css%}
+    </head>
+    <body>
+        {%app_entry%}
+        <footer>
+            {%config%}
+            {%scripts%}
+            {%renderer%}
+        </footer>
+    </body>
+</html>"""
 
 
 app.layout = html.Div([
@@ -77,11 +121,7 @@ app.layout = html.Div([
             dcc.Store(id="screen-width-store"),
             dcc.Location(id='url', refresh=False),
             page_container,
-            html.Div(id='footer', children=[
-                html.P("Statistical Stories. All rights reserved."),
-                html.P(className="footer-pipe", children=["|"]),
-                html.A("We're open source!", target="_blank", href="https://github.com/Currie32/statistical_stories")
-            ]),
+            footer
         ]),
     ])
 ])
