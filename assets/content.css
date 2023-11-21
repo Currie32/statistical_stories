@@ -24,6 +24,9 @@
     margin-top: 60px;
     text-align: center;
 }
+.dash-dropdown {
+    margin-bottom: 10px;
+}
 .paragraph {
     font-size: 18px;
     margin: auto;
