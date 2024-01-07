@@ -13,7 +13,7 @@ layout = html.Div(className='content', children=[
     html.H1(className='content-title', children='Poisson Distribution'),
     html.Div(
         className="resource-link",
-        children=[html.A("Link to numpy", target="_blank", href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.poisson.html")]
+        children=[html.A("Link to scipy", target="_blank", href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html")]
     ),
     html.H2(className='section-title', children='Overview'),
     html.Div(className='paragraph', children=[
@@ -28,6 +28,10 @@ layout = html.Div(className='content', children=[
         html.P("Dave was eager to try it out. Dan taught him the formula and they worked together to calculate the probabilities for various numbers of croissants sold in an hour. Dave realized that the distribution allowed him to estimate the likelihood of selling a particular number of croissants, even if the actual sales varied from hour to hour."),
         html.P("Armed with this knowledge, Dave felt more prepared to handle the fluctuations in his bakery's sales. He continued to use the Poisson distribution as a tool to guide his production planning and make informed decisions about how many croissants to bake each morning."),
         html.P("And so, Dave's bakery flourished as he embraced the Poisson distribution, bringing his customers a steady supply of delicious croissants, while also satisfying his own curiosity about the patterns in his sales data."),
+    ]),
+    html.H2(className='section-title', children='Summary'),
+    html.Div(className='paragraph', children=[
+        html.P("The Poisson distribution is a discrete probability distribution that describes the number of events that occur within a fixed interval of time or space, assuming these events happen independently and at a constant rate.")
     ]),
     html.H2(className='section-title', children='Visualizing the Poisson Distribution'),
     html.Div(className='plot-parameters', children=[
@@ -73,50 +77,6 @@ layout = html.Div(className='content', children=[
         html.P(children=["6. The number of website visits or requests received per unit of time."]),
         html.P(children=["7. The occurrence of natural events like earthquakes or volcanic eruptions in a specific region."]),
     ]),
-    html.H2(className='section-title', children='Code'),
-    html.Div(className='paragraph', children=[
-        html.P(children=["This plot can be generated using the code below it."]),
-    ]),
-    html.Button('Generate New Data', id='button-new-data', n_clicks=0),
-    html.Div(className='plot-parameters', children=[
-        html.Div(className='parameter', children=[
-            html.Label(className='parameter-label', children='Lambda'),
-            dcc.Input(className='parameter-value', id='input-lambda-poisson-histogram', value=3, min=0, max=100, step=0.1, type='number'),
-        ]),
-    ]),
-    dcc.Graph(id='plot-histogram-poisson'),
-    html.Div(className='paragraph', children=[
-        html.Pre(
-            '''
-import numpy as np
-import plotly.graph_objects as go
-
-
-# Set the parameters for sampling from a poisson distribution
-lmbda = 3.0
-samples = 1000
-sample = np.random.poisson(lmbda, samples)
-
-histogram = go.Histogram(
-    x=sample,
-    histnorm='probability',
-    opacity=0.7,
-    marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
-    showlegend=False,
-    hovertemplate='# events: %{x:.0f}<br>Probability: %{y:.2f}<extra></extra>',
-)
-
-layout = go.Layout(
-    title='Poisson Distribution',
-    xaxis=dict(title='Number of Events', range=[-1, 20]),
-    yaxis=dict(title='Probability'),
-    showlegend=True,
-)
-
-# Create the plot
-go.Figure(data=[histogram], layout=layout)
-            ''')
-    ])
 ])
 
 
@@ -170,40 +130,3 @@ def pmf_cdf_poisson(
     )
 
     return fig_pdf, fig_cdf
-
-
-@callback(
-    Output('plot-histogram-poisson', 'figure'),
-    Input('button-new-data', 'n_clicks'),
-    Input('input-lambda-poisson-histogram', 'value'),
-)
-def histogram_poisson(n_clicks: int, lmbda: float) -> go.Figure:
-    """
-    Sample from a poisson distribution, then generate a histogram
-    using this data. Update the plot each time "button-new-data" is clicked,
-    or the lambda value is changed.
-    """
- 
-    samples = 1000
-    sample = np.random.poisson(lmbda, samples)
-
-    histogram = go.Histogram(
-        x=sample,
-        histnorm='probability',
-        opacity=0.7,
-        marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
-        showlegend=False,
-        hovertemplate='# events: %{x:.0f}<br>Probability: %{y:.2f}<extra></extra>',
-    )
-
-    layout = go.Layout(
-        title='Poisson Distribution',
-        xaxis=dict(title='Number of Events', range=[-1, 20]),
-        yaxis=dict(title='Probability'),
-        showlegend=True,
-    )
-
-    # Create the plot
-    fig = go.Figure(data=[histogram], layout=layout)
-
-    return fig

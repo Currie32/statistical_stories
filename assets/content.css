@@ -6,6 +6,9 @@
     margin-top: 5px;
     padding: 6px 10px;
 }
+.column-header-name {
+    color: black;
+}
 .content {
     margin: 0 auto 60px;
     max-width: 800px;
@@ -26,6 +29,22 @@
 }
 .dash-dropdown {
     margin-bottom: 10px;
+}
+.hint {
+    color: #777;
+    font-style: italic;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.metric-value {
+    margin-left: 10px;
+}
+.metric-value-text {
+    display: flex;
+    /* Center the text */
+    justify-content: center;
+    font-size: 24px;
+    margin: 20px auto;
 }
 .paragraph {
     font-size: 18px;
@@ -113,6 +132,19 @@ table td, table th {
 table th {
     background-color: #05445E;
     color: #fafafa;
+}
+.table-dash {
+    /* center the content */
+    margin: 0px 10px;
+    min-width: 150px;
+}
+.table-dash span {
+    text-align: center;
+}
+.tables-two {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 @media (max-width: 1200px) {
     .content {
