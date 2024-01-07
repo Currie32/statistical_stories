@@ -32,6 +32,10 @@ layout = html.Div(className='content', children=[
         html.P("After examining the table, Dave concluded that 4.5 was less than the critical value. This indicated that there was not a significant association between the type of soil and tomato colour."),
         html.P("Although Dave didn't find a significant relationship, he was not disheartened. He realized that the chi-square test had provided valuable insights into the distribution of tomato colours across the two sections of his garden. It had helped him analyze the data and make informed conclusions."),
     ]),
+    html.H2(className='section-title', children='Summary'),
+    html.Div(className='paragraph', children=[
+        html.P("The chi-square test is a statistical method used to determine if there is a significant association between categorical variables by comparing observed and expected frequencies in a contingency table.")
+    ]),
     html.H2(className='section-title', children='Visualizing the Chi-Square Test'),
     html.Div(className='plot-parameters', children=[
         html.Div(className='parameter', children=[

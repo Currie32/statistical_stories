@@ -1,0 +1,4 @@
+#table-ranking input, #table-ranking tr {
+    /* Change cursor on hover */
+    cursor: pointer;
+}

@@ -12,7 +12,7 @@ layout = html.Div(className='content', children=[
     html.H1(className='content-title', children='Bayesian Optimization'),
     html.Div(
         className="resource-link",
-        children=[html.A("Link to a bayesian-optimization package on GitHub", target="_blank", href="https://github.com/bayesian-optimization/BayesianOptimization")]
+        children=[html.A("Link to GitHub", target="_blank", href="https://github.com/bayesian-optimization/BayesianOptimization")]
     ),
     html.H2(className='section-title', children='Overview'),
     html.Div(className='paragraph', children=[

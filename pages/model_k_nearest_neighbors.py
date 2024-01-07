@@ -30,6 +30,10 @@ layout = html.Div(className='content', children=[
         html.P("Through his tree-tastic adventures and experiments, Dave realized the power of the k-nearest neighbors algorithm in identifying and classifying trees based on their similarities. It allowed him to delve deeper into the enchanting world of trees, appreciating their unique features and learning about their various species."),
         html.P("Grateful for this newfound knowledge, Dave continued to explore nearby lands, employing the algorithm in different ways to solve tree-related mysteries and foster his profound love for nature. And so, his journey of discovery and admiration flourished, all thanks to the enchanting capabilities of the k-nearest neighbors algorithm."),
     ]),
+    html.H2(className='section-title', children='Summary'),
+    html.Div(className='paragraph', children=[
+        html.P("The k-nearest neighbors (KNN) algorithm is a machine learning approach where a data point is classified based on the majority class of its k nearest neighbors in the feature space.")
+    ]),
     html.H2(className='section-title', children='Visualizing the k-nearest neighbors algorithm'),
     html.Div(className='paragraph-italic', children=[
         html.P(children=[

@@ -13,7 +13,7 @@ layout = html.Div(className='content', children=[
     html.H1(className='content-title', children='Negative Binomial Distribution'),
     html.Div(
         className="resource-link",
-        children=[html.A("Link to numpy", target="_blank", href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.negative_binomial.html")]
+        children=[html.A("Link to scipy", target="_blank", href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nbinom.html")]
     ),
     html.H2(className='section-title', children='Overview'),
     html.Div(className='paragraph', children=[
@@ -27,6 +27,10 @@ layout = html.Div(className='content', children=[
         html.P("Dave realized that the negative binomial distribution helped him understand the likelihood of achieving his goal based on his shooting performance. It gave him insights into the average number of attempts it took for him to make five shots, as well as the variation in his performance from game to game."),
         html.P("Armed with this knowledge, Dave could set realistic expectations for himself. He understood that if his shooting skills improved, he could expect to make five shots in fewer attempts. Conversely, if he was having an off day, he might need more attempts to reach his target."),
         html.P("As Dave continued playing basketball and tracking his shooting performance, he found the negative binomial distribution to be a useful tool in understanding his progress. It allowed him to set goals, monitor his improvement, and adjust his strategy accordingly."),
+    ]),
+    html.H2(className='section-title', children='Summary'),
+    html.Div(className='paragraph', children=[
+        html.P("The negative binomial distribution describes the number of independent and identically distributed Bernoulli trials needed for a predetermined number of failures to occur, with a given probability of success on each trial.")
     ]),
     html.H2(className='section-title', children='Visualizing the Negative Binomial Distribution'),
     html.Div(className='plot-parameters', children=[
@@ -74,53 +78,6 @@ layout = html.Div(className='content', children=[
         html.P(children=["4. To model the number of disease outbreaks or infections until a certain number of hospitalizations is reached."]),
         html.P(children=["5. To model the number of website visits before a certain number of purchases occur."]),
     ]),
-    html.H2(className='section-title', children='Code'),
-    html.Div(className='paragraph', children=[
-        html.P(children=["This plot can be generated using the code below it."]),
-    ]),
-    html.Button('Generate New Data', id='button-new-data', n_clicks=0),
-    html.Div(className='plot-parameters', children=[
-        html.Div(className='parameter', children=[
-            html.Label(className='parameter-label', children='Number of Successes'),
-            dcc.Input(className='parameter-value', id='input-successes-negative-binomial-histogram', value=5, min=1, max=100, step=1, type='number'),
-        ]),
-        html.Div(className='parameter', children=[
-            html.Label(className='parameter-label', children='Probability of Success'),
-            dcc.Input(className='parameter-value', id='input-probability-negative-binomial-histogram', value=0.3, min=0, max=1, step=0.01, type='number'),
-        ])
-    ]),
-    dcc.Graph(id='plot-histogram-negative-binomial'),
-    html.Div(className='paragraph', children=[
-        html.Pre(
-            '''
-import numpy as np
-import plotly.graph_objects as go
-
-
-n_successes = 5
-prob_success = 0.3
-samples = 1000
-sample = np.random.negative_binomial(n_successes, prob_success, samples)
-
-histogram = go.Histogram(
-    x=sample,
-    histnorm='probability',
-    opacity=0.7,
-    marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
-    showlegend=False,
-    hovertemplate='# failures: %{x:.1f}<br>Probability: %{y:.2f}<extra></extra>',
-)
-
-layout = go.Layout(
-    title='Negative Binomial Distribution',
-    xaxis=dict(title='Number of Failures', range=[0, 50]),
-    yaxis=dict(title='Probability'),
-    showlegend=True,
-)
-
-go.Figure(data=[histogram], layout=layout)
-            ''')
-    ])
 ])
 
 
@@ -176,44 +133,3 @@ def pmf_cdf_negative_binomial(
     )
 
     return fig_pmf, fig_cdf
-
-
-@callback(
-    Output('plot-histogram-negative-binomial', 'figure'),
-    Input('button-new-data', 'n_clicks'),
-    Input('input-successes-negative-binomial-histogram', 'value'),
-    Input('input-probability-negative-binomial-histogram', 'value'),
-)
-def histogram_negative_binomial(
-    n_clicks: int,
-    n_successes: int,
-    prob_success: float,
-) -> plotly_figure:
-    """
-    Sample from a negative binomial distribution, then generate a histogram
-    using this data. Update the plot each time "button-new-data" is clicked,
-    or one of the sampling parameters.
-    """
-
-    samples = 1000
-    sample = np.random.negative_binomial(n_successes, prob_success, samples)
-
-    histogram = go.Histogram(
-        x=sample,
-        histnorm='probability',
-        opacity=0.7,
-        marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
-        showlegend=False,
-        hovertemplate='# failures: %{x:.1f}<br>Probability: %{y:.2f}<extra></extra>',
-    )
-
-    layout = go.Layout(
-        title='Negative Binomial Distribution',
-        xaxis=dict(title='Number of Failures', range=[0, 50]),
-        yaxis=dict(title='Probability'),
-        showlegend=True,
-    )
-
-    fig = go.Figure(data=[histogram], layout=layout)
-
-    return fig

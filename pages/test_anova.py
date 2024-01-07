@@ -32,7 +32,11 @@ layout = html.Div(className='content', children=[
         html.P("Excited to unveil the truth, Dave eagerly applied ANOVA to his orchard data. The results showed that the SSB was substantially larger than the SSW. This meant that there was a significant difference between the three groups of trees. In simpler terms, the average fruit yields of Apple, Orange, and Mango trees were not the same."),
         html.P("Delighted by his discovery, Dave concluded that ANOVA was a powerful tool for determining if there were any meaningful differences in fruit yields between different types of trees. It enabled him to make informed decisions based on the data he collected, guiding him to optimize his orchard's productivity."),
         html.P("From that day forward, Dave continued to explore the world of statistics and used ANOVA to analyze various aspects of his orchard. He was always eager to uncover hidden insights and make data-driven choices to nurture his trees and achieve bountiful harvests year after year."),
-        ]),
+    ]),
+    html.H2(className='section-title', children='Summary'),
+    html.Div(className='paragraph', children=[
+        html.P("ANOVA (Analysis of Variance) is a statistical test used to compare means of three or more groups to determine if there are any statistically significant differences among them.")
+    ]),
     html.H2(className='section-title', children='Visualizing ANOVA'),
     html.Button('Generate New Data', id='button-new-data', n_clicks=0),
     html.Div(className='plot-parameters', children=[

@@ -13,7 +13,7 @@ layout = html.Div(className='content', children=[
     html.H1(className='content-title', children='Normal Distribution'),
     html.Div(
         className="resource-link",
-        children=[html.A("Link to numpy", target="_blank", href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html")]
+        children=[html.A("Link to scipy", target="_blank", href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html")]
     ),
     html.H2(className='section-title', children='Overview'),
     html.Div(className='paragraph', children=[
@@ -25,6 +25,10 @@ layout = html.Div(className='content', children=[
         html.P("Dave also learned that the normal distribution has some unique properties. He found out that the average height of the cornstalks was right in the middle of the curve, called the mean. He also learned that the curve was symmetrical, meaning that the left and right sides were mirror images of each other."),
         html.P("Furthermore, Dave discovered that the normal distribution had a standard deviation. The standard deviation is a measure of how spread out the data is. If the standard deviation is small, the data points are closely packed together, creating a narrow curve. If the standard deviation is large, the data points are more spread out, making the curve wider."),
         html.P("With this newfound knowledge, Dave was able to make predictions about his cornfield. He could estimate how many cornstalks would fall within a certain height range based on the properties of the normal distribution."),
+    ]),
+    html.H2(className='section-title', children='Summary'),
+    html.Div(className='paragraph', children=[
+        html.P("The normal distribution, also known as the bell curve, is a symmetric probability distribution that is characterized by a central peak and tails that extend infinitely in both directions, with approximately 68% of the data falling within one standard deviation of the mean, 95% within two standard deviations, and 99.7% within three standard deviations.")
     ]),
     html.H2(className='section-title', children='Visualizing the Normal Distribution'),
     html.Div(className='plot-parameters', children=[
@@ -92,37 +96,6 @@ layout = html.Div(className='content', children=[
             dcc.Input(className='parameter-value', id='std-input-normal-histogram', value=1, min=-1000, max=1000, step=0.1, type='number'),
         ])
     ]),
-    dcc.Graph(id='plot-histogram-normal'),
-    html.Div(className='paragraph', children=[
-        html.Pre(
-            '''
-import numpy as np
-import plotly.graph_objects as go
-
-mean = 0
-std = 1
-samples = 1000
-sample = np.random.normal(mean, std, samples)
-
-histogram = go.Histogram(
-    x=sample,
-    histnorm='probability',
-    opacity=0.7,
-    marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
-    showlegend=False,
-    hovertemplate='x: %{x:.1f}<br>Probability: %{y:.2f}<extra></extra>',
-)
-
-layout = go.Layout(
-    title='Normal Distribution',
-    xaxis=dict(title='X', range=[-5, 5]),
-    yaxis=dict(title='Probability'),
-    showlegend=True,
-)
-
-go.Figure(data=[histogram], layout=layout)
-            ''')
-    ])
 ])
 
 
@@ -179,44 +152,3 @@ def pdf_cdf_normal(
     )
 
     return fig_pdf, fig_cdf
-
-
-@callback(
-    Output('plot-histogram-normal', 'figure'),
-    Input('button-new-data', 'n_clicks'),
-    Input('mean-input-normal-histogram', 'value'),
-    Input('std-input-normal-histogram', 'value'),
-)
-def histogram_normal(
-    n_clicks: int,
-    mean: float,
-    std: float,
-) -> plotly_figure:
-    """
-    Sample from a normal distribution, then generate a histogram
-    using this data. Update the plot each time "button-new-data" is clicked,
-    or one of the sampling parameters.
-    """
-    
-    samples = 1000
-    sample = np.random.normal(mean, std, samples)
-
-    histogram = go.Histogram(
-        x=sample,
-        histnorm='probability',
-        opacity=0.7,
-        marker=dict(color='lightblue', line=dict(color='darkblue', width=1)),
-        showlegend=False,
-        hovertemplate='x: %{x:.1f}<br>Probability: %{y:.2f}<extra></extra>',
-    )
-
-    layout = go.Layout(
-        title='Normal Distribution',
-        xaxis=dict(title='X', range=[-5, 5]),
-        yaxis=dict(title='Probability'),
-        showlegend=True,
-    )
-
-    fig = go.Figure(data=[histogram], layout=layout)
-
-    return fig
