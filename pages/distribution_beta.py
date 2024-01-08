@@ -59,7 +59,7 @@ layout = html.Div(className='content', children=[
 
             Where:
             - $$x$$: The random variable between 0 and 1.
-            - $$α (alpah)$$: A parameter that controls the shape of the distribution on the left side. Higher values of α result in a distribution more concentrated towards the left (closer to 0).
+            - $$α (alpha)$$: A parameter that controls the shape of the distribution on the left side. Higher values of α result in a distribution more concentrated towards the left (closer to 0).
             - $$β (beta)$$: A parameter that controls the shape of the distribution on the right side. Higher values of β result in a distribution more concentrated towards the right (closer to 1).
             - $$x^{α - 1} \cdot (1 - x)^{β - 1}$$: The numerator represents the probability density at a given point.
             - $$B(α, β)$$: A normalizing factor ensuring that the total area under the probability density function is 1.

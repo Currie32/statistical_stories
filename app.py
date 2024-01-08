@@ -90,6 +90,7 @@ app.layout = html.Div([
                 ]),
                 dbc.DropdownMenu(
                     children=[
+                        dbc.DropdownMenuItem(dcc.Link("Bernoulli", href="/bernoulli")),
                         dbc.DropdownMenuItem(dcc.Link("Beta", href="/beta")),
                         dbc.DropdownMenuItem(dcc.Link("Negative Binomial", href="/negative-binomial")),
                         dbc.DropdownMenuItem(dcc.Link("Normal", href="/normal")),
@@ -221,6 +222,7 @@ def search_pages(
 
     # Pages of the website that can be searched
     pages = [
+        {'title': 'Bernoulli distribution', 'path': 'pages/distribution_bernoulli.py', 'url': '/bernoulli'},
         {'title': 'Beta distribution', 'path': 'pages/distribution_beta.py', 'url': '/beta'},
         {'title': 'Negative binomial distribution', 'path': 'pages/distribution_negative_binomial.py', 'url': '/negative-binomial'},
         {'title': 'Normal distribution', 'path': 'pages/distribution_normal.py', 'url': '/normal'},
