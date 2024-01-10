@@ -102,6 +102,7 @@ app.layout = html.Div([
                 ),
                 dbc.DropdownMenu(
                     children=[
+                        dbc.DropdownMenuItem(dcc.Link("Cosine Similarity", href="/cosine-similarity")),
                         dbc.DropdownMenuItem(dcc.Link("NDCG", href="/ndcg")),
                     ],
                     nav=True,
@@ -227,6 +228,7 @@ def search_pages(
         {'title': 'Negative binomial distribution', 'path': 'pages/distribution_negative_binomial.py', 'url': '/negative-binomial'},
         {'title': 'Normal distribution', 'path': 'pages/distribution_normal.py', 'url': '/normal'},
         {'title': 'Poisson distribution', 'path': 'pages/distribution_poisson.py', 'url': '/poisson'},
+        {'title': 'Cosine similarity', 'path': 'pages/metric_cosine_similarity.py', 'url': '/cosine-similarity'},
         {'title': 'NDCG', 'path': 'pages/metric_ndcg.py', 'url': '/ndcg'},
         {'title': 'Bayesian optimization', 'path': 'pages/bayesian_optimization.py', 'url': '/bayesian-optimization'},
         {'title': 'k-nearest neighbors', 'path': 'pages/model_k_nearest_neighbors.py', 'url': '/k-nearest-neighbors'},

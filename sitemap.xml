@@ -2,42 +2,58 @@
 <sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd">
 	<sitemap>
 		<loc>https://statisticalstories.xyz/</loc>
-  	    <lastmod>2023-11-20T16:10:00+00:00</lastmod>
+  	    <lastmod>2024-01-09T20:15:00+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>https://statisticalstories.xyz/bernoulli</loc>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>https://statisticalstories.xyz/beta</loc>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
 	</sitemap>
 	<sitemap>
 		<loc>https://statisticalstories.xyz/negative-binomial</loc>
-		<lastmod>2023-07-11T11:30:00+00:00</lastmod>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
 	</sitemap>
 	<sitemap>
 		<loc>https://statisticalstories.xyz/normal</loc>
-		<lastmod>2023-07-11T11:30:00+00:00</lastmod>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
 	</sitemap>
 	<sitemap>
 		<loc>https://statisticalstories.xyz/poisson</loc>
-		<lastmod>2023-07-11T11:30:00+00:00</lastmod>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>https://statisticalstories.xyz/cosine-similarity</loc>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>https://statisticalstories.xyz/ndcg</loc>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
 	</sitemap>
     <sitemap>
 		<loc>https://statisticalstories.xyz/k-nearest-neighbors</loc>
-		<lastmod>2023-07-09T10:30:00+00:00</lastmod>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
 	</sitemap>
     <sitemap>
 		<loc>https://statisticalstories.xyz/anova</loc>
-		<lastmod>2023-07-09T10:30:00+00:00</lastmod>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
 	</sitemap>
 	<sitemap>
 		<loc>https://statisticalstories.xyz/chi-square</loc>
-		<lastmod>2023-07-10T16:30:00+00:00</lastmod>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
 	</sitemap>
 	<sitemap>
 		<loc>https://statisticalstories.xyz/bayesian-optimization</loc>
-  	    <lastmod>2023-11-20T16:10:00+00:00</lastmod>
+  	    <lastmod>2024-01-09T20:15:00+00:00</lastmod>
 	</sitemap>
 	<sitemap>
 		<loc>https://statisticalstories.xyz/terms</loc>
-		<lastmod>2023-11-16T21:30:00+00:00</lastmod>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
 	</sitemap>
 	<sitemap>
 		<loc>https://statisticalstories.xyz/privacy_policy</loc>
-		<lastmod>2023-11-16T21:30:00+00:00</lastmod>
+		<lastmod>2024-01-09T20:15:00+00:00</lastmod>
 	</sitemap>
 </sitemapindex>
