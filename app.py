@@ -120,6 +120,7 @@ app.layout = html.Div([
                 dbc.DropdownMenu(
                     children=[
                         dbc.DropdownMenuItem(dcc.Link("K-Nearest Neighbors", href="/k-nearest-neighbors")),
+                        dbc.DropdownMenuItem(dcc.Link("Support Vector Machine", href="/support-vector-machine")),
                     ],
                     nav=True,
                     in_navbar=True,
@@ -232,6 +233,7 @@ def search_pages(
         {'title': 'NDCG', 'path': 'pages/metric_ndcg.py', 'url': '/ndcg'},
         {'title': 'Bayesian optimization', 'path': 'pages/bayesian_optimization.py', 'url': '/bayesian-optimization'},
         {'title': 'k-nearest neighbors', 'path': 'pages/model_k_nearest_neighbors.py', 'url': '/k-nearest-neighbors'},
+        {'title': 'Support vector machine', 'path': 'pages/model_support_vector_machine.py', 'url': '/support-vector-machine'},
         {'title': 'ANOVA', 'path': 'pages/test_anova.py', 'url': '/anova'},
         {'title': 'Chi-square', 'path': 'pages/test_chi_square.py', 'url': '/chi-square'},
     ]
